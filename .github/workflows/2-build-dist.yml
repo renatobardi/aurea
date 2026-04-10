@@ -49,8 +49,8 @@ jobs:
 
   publish-pypi:
     name: Publish to PyPI
-   needs: build-exe                                                                                                  
-    if: github.event_name == 'release' 
+    needs: build-exe
+    if: github.event_name == 'release'
     runs-on: ubuntu-latest
     environment: pypi
     permissions:
