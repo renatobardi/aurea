@@ -79,8 +79,12 @@ aurea/
 │   │   └── meta.json        (search metadata)
 │   ├── midnight/, aurora/, ... (40+ themes from awesome-design-md)
 ├── src/aurea/templates/
-│   ├── reveal.html          (base reveal.js template, vendored)
-│   └── slide.md             (Markdown template for new projects)
+│   ├── reveal.html.j2       (Jinja2 template — reveal.js presentation)
+│   └── slide_readme.md.j2   (README template for new projects)
+├── src/aurea/vendor/
+│   ├── revealjs/dist/       (reveal.js 5.2.1 core — reveal.js UMD)
+│   ├── highlight.min.js     (highlight.js 11.9.0 UMD — safe to inline)
+│   └── marked.min.js        (marked 9.1.6 UMD — safe to inline)
 ├── tests/
 │   ├── unit/
 │   │   ├── test_cli.py
@@ -104,33 +108,7 @@ aurea/
 └── aurea-spec.md            (full specification & design decisions)
 ```
 
-**Current Status**: Phase 0 (spec written, repo initialized). Implementation begins in Phase 1.
-
-## Before Starting Implementation (Phase 1)
-
-**To bootstrap Phase 1, create these files in this order:**
-
-1. **pyproject.toml** — Project metadata and dependencies
-   - Name: `aurea`, version: `0.1.0`
-   - Python: `>=3.8`
-   - Core deps: `typer[all]>=0.9.0`, `jinja2>=3.0`, `httpx>=0.25`, `beautifulsoup4>=4.12`, `cssutils>=2.10`, `watchdog>=3.0` (for serve)
-   - Dev deps: `pytest>=7.0`, `pytest-cov>=4.0`, `mypy>=1.0`, `ruff>=0.1.0`, `pyinstaller>=6.0` (for distributions)
-   - Extract extras: add `cssutils`, `httpx` to optional group
-   - Entry point: `aurea = aurea.cli:app`
-
-2. **src/aurea/__init__.py** — Package init with `__version__ = "0.1.0"`
-
-3. **.github/workflows/1-lint-test.yml** — PR workflow (sequential: lint → type check → tests)
-   - Run `ruff check .` and `ruff format --check .`
-   - Run `mypy src/`
-   - Run `pytest tests/ --cov=src --cov-fail-under=80`
-   - Do NOT run on-push to main (only on PR)
-
-4. **src/aurea/cli.py** — Typer entry point with 6 commands: `init`, `build`, `serve`, `theme`, `extract`, `--version`
-
-5. **tests/fixtures/** — Sample slides, themes, expected HTML (use for integration tests)
-
-**Key rule**: Do not merge Phase 1 until **all 6 CLI commands exist** (even if stubs), tests run, and workflows are green.
+**Current Status**: M0–M3 implemented. PR #1 open (`feat/001-aurea-cli-toolkit`). T063 (four-mode distribution validation) pending.
 
 ## Development Workflow
 
@@ -318,6 +296,23 @@ These are non-negotiable constraints from the spec. Decisions here were delibera
 **Offline output is non-negotiable:**
 - ❌ Don't add `<link href="https://...">` or `<script src="https://...">`
 - ✅ Do vendor CSS/JS into `<style>`/`<script>` tags or base64 data URIs
+
+**reveal.js 5.x plugins are pure ES modules — cannot be inlined:**
+- ❌ Don't try to inline `.mjs` plugin files in `<script>` tags — they use `import { marked } from 'marked'` which fails outside ES module context
+- ✅ Use `vendor/highlight.min.js` + `vendor/marked.min.js` (UMD builds) and the IIFE shims in `inline_assets()` in `build.py`
+- ❌ Don't upgrade the UMD vendor files without checking for bare `import`/`export` statements
+
+**`</script>` literals inside inlined JS:**
+- ❌ Any JS file containing the string `</script>` (even in a string literal) will prematurely close the `<script>` block in HTML
+- ✅ `_read()` in `build.py` escapes all `</script>` → `<\/script>` before inlining — maintain this for any new vendor files
+
+**Logging level:**
+- ❌ `_log.py` was accidentally set to `WARNING` — silences all `_log.info()` calls
+- ✅ Always set `level=logging.INFO` in both `basicConfig` and `_log.setLevel()`
+
+**Local registry in `aurea init`:**
+- ❌ Don't copy the entire global `registry.json` (64 themes) to the local project — it bakes in stale metadata
+- ✅ Create a minimal local registry containing only the selected theme, derived from the theme's `meta.json`
 
 **Theme system consistency:**
 - ❌ Don't change DESIGN.md format without updating extract.py
