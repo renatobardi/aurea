@@ -136,9 +136,7 @@ class TestRunServeEdgeCases:
             os.chdir(orig)
         assert exc_info.value.code == 1
 
-    def test_keyboard_interrupt_non_watch_mode_shuts_down_server(
-        self, tmp_path: Path
-    ) -> None:
+    def test_keyboard_interrupt_non_watch_mode_shuts_down_server(self, tmp_path: Path) -> None:
         """KeyboardInterrupt in serve_forever triggers server.shutdown()."""
         import http.server
         import os

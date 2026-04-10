@@ -134,9 +134,7 @@ class TestServeWatchMode:
         )
         return server, actual_port
 
-    def test_watch_mode_observer_stopped_on_keyboard_interrupt(
-        self, tmp_path: Path
-    ) -> None:
+    def test_watch_mode_observer_stopped_on_keyboard_interrupt(self, tmp_path: Path) -> None:
         """_run_serve_watch stops observer and server cleanly on KeyboardInterrupt."""
         import os
         from unittest.mock import patch
