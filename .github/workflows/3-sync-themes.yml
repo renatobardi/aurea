@@ -1,0 +1,39 @@
+name: 3 — Sync Themes
+
+on:
+  schedule:
+    - cron: "0 3 * * 1"  # Every Monday at 03:00 UTC
+  workflow_dispatch:
+
+jobs:
+  sync:
+    name: Import from awesome-design-md
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -e ".[dev]"
+      - name: Run import script
+        run: python scripts/import-awesome-designs.py
+      - name: Check for changes
+        id: changes
+        run: |
+          git diff --quiet || echo "changed=true" >> "$GITHUB_OUTPUT"
+      - name: Create feature branch and PR                                                                             
+        if: steps.changes.outputs.changed == 'true'             
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |                                                                                                         
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"                                         
+          BRANCH_NAME="chore/sync-themes-$(date +%s)"           
+          git checkout -b "$BRANCH_NAME"                                                                               
+          git add src/aurea/themes/
+          git commit -m "chore: sync themes from awesome-design-md"                                                    
+          git push origin "$BRANCH_NAME"                                                                               
+          gh pr create --base main --head "$BRANCH_NAME" \
+            --title "chore: sync themes from awesome-design-md" \                                                      
+            --body "Automated theme sync from VoltAgent/awesome-design-md"

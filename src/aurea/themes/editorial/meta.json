@@ -1,0 +1,18 @@
+{
+  "id": "editorial",
+  "name": "Editorial",
+  "category": "print",
+  "tags": ["serif", "white", "classic", "newspaper"],
+  "mood": "Authoritative, trustworthy, refined — for research and thought leadership",
+  "colors": {
+    "primary": "#1a1a1a",
+    "background": "#fafafa",
+    "text": "#1a1a1a",
+    "accent": "#c0392b"
+  },
+  "typography": {
+    "heading": "Georgia, 'Times New Roman', serif",
+    "body": "Georgia, 'Times New Roman', serif"
+  },
+  "version": "1.0.0"
+}

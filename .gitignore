@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+# build/ is intentionally NOT ignored — it contains the PyInstaller spec (build/aurea.spec)
+# Only ignore build artifacts inside it:
+build/dist/
+build/work/
+*.egg
+*.whl
+.venv/
+venv/
+env/
+.env*
+
+# Testing
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Distribution artifacts
+*.pyz
+aurea.exe
+aurea.bin
+aurea.app
+
+# OS
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+
+# IDEs
+.vscode/
+.idea/
+*.iml
+
+# Project outputs (generated files — not committed)
+# Note: vendor/ IS committed (vendored deps per Art. VIII)
+
+# Local work files (not part of the project)
+.awesome-design-md/
+.claude/
+speckit-*.md

@@ -1,0 +1,18 @@
+{
+  "id": "midnight",
+  "name": "Midnight",
+  "category": "dark",
+  "tags": ["dark", "minimal", "purple", "focused"],
+  "mood": "Focused, mysterious, elegant — perfect for technical deep-dives",
+  "colors": {
+    "primary": "#7c3aed",
+    "background": "#0d0d0d",
+    "text": "#e5e5e5",
+    "accent": "#a855f7"
+  },
+  "typography": {
+    "heading": "Inter, system-ui, sans-serif",
+    "body": "Inter, system-ui, sans-serif"
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,64 @@
+name: 2 — Build & Distribute
+
+on:
+  release:                                                                                                             
+    types: [published]
+  workflow_run:                                                                                                        
+    workflows: ["1 — Lint & Test"]                              
+    types: [completed]            
+    branches: [main]  
+
+jobs:
+  build-zipapp:
+    name: Build Zipapp
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install shiv build
+      - run: python -m build --wheel
+      - run: |
+          shiv --compressed -c aurea \
+            -o dist/aurea.pyz \
+            dist/*.whl
+      - uses: actions/upload-artifact@v4
+        with:
+          name: aurea-zipapp
+          path: dist/aurea.pyz
+
+  build-exe:
+    name: Build Executables
+    needs: build-zipapp
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e ".[dev,extract]" pyinstaller
+      - run: pyinstaller build/aurea.spec
+      - uses: actions/upload-artifact@v4
+        with:
+          name: aurea-${{ matrix.os }}
+          path: dist/aurea*
+
+  publish-pypi:
+    name: Publish to PyPI
+    needs: build-exe
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install build
+      - run: python -m build
+      - uses: pypa/gh-action-pypi-publish@release/v1

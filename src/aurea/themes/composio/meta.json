@@ -1,0 +1,21 @@
+{
+  "id": "composio",
+  "name": "Composio Inspired Design System",
+  "category": "general",
+  "tags": [
+    "general",
+    "imported"
+  ],
+  "mood": "Professional design system",
+  "colors": {
+    "primary": "#333333",
+    "background": "#ffffff",
+    "text": "#111111"
+  },
+  "typography": {
+    "heading": "sans-serif",
+    "body": "sans-serif"
+  },
+  "version": "1.0.0",
+  "source": "awesome-design-md"
+}
