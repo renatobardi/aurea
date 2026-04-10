@@ -19,10 +19,7 @@
             python-version: "3.12"
         - run: pip install shiv build                                                                                  
         - run: python -m build --wheel                            
-        - run: |
-            shiv --compressed -c aurea \
-              -o dist/aurea.pyz \                                                                                      
-              dist/*.whl
+        - run: shiv --compressed -c aurea -o dist/aurea.pyz dist/*.whl
         - name: Generate SHA256 checksum                                                                               
           run: sha256sum dist/aurea.pyz > dist/aurea.pyz.sha256   
         - uses: actions/upload-artifact@v4                                                                             
