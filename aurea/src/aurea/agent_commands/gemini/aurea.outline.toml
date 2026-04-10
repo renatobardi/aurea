@@ -1,0 +1,106 @@
+[command]
+name = "aurea.outline"
+description = "Generate a narrative structure and slide plan for the presentation"
+body = """
+# aurea.outline — Narrative Structure & Slide Plan
+
+You are helping the user create a structured outline for their Aurea presentation. The outline is the creative blueprint — it defines the story arc before any slide content is written.
+
+## Step 1 — Read project context
+
+Read the following files:
+
+1. `{{CONFIG_PATH}}` — get `active_theme`, `author`, `project_name`, and any presentation defaults.
+2. `{{DESIGN_MD_PATH}}` — read the active theme's design system. Pay attention to:
+   - **Tone guidelines** (formal vs casual language)
+   - **Do's and Don'ts** (what visual/content patterns work or don't)
+   - **Slide type inventory** (what layouts are available: title, content, two-column, quote, data, etc.)
+
+## Step 2 — Parse the presentation brief
+
+The user's input is: `{{args}}`
+
+Extract the following from the input (ask if missing):
+- **Topic**: what is this presentation about?
+- **Audience**: who will watch? (executives, engineers, customers, general public)
+- **Objective**: what should the audience think/feel/do after?
+- **Duration**: how many minutes? (default: 20 min → ~15 slides at 1.5 min/slide)
+- **Tone**: authoritative, conversational, inspirational, educational, persuasive?
+
+If any of these are unclear, ask before proceeding.
+
+## Step 3 — Design the narrative arc
+
+Structure the presentation using a four-phase narrative:
+
+| Phase | Purpose | Slide % | Emotional beat |
+|-------|---------|---------|---------------|
+| **Opening** | Hook + frame the problem/opportunity | ~20% | Curiosity, tension |
+| **Development** | Evidence, context, exploration | ~40% | Understanding, engagement |
+| **Climax** | The insight, solution, or turning point | ~20% | Revelation, conviction |
+| **Conclusion** | Action, implications, memorable close | ~20% | Clarity, momentum |
+
+Do not make this structure mechanical — let the topic and audience shape how prominently each phase appears.
+
+## Step 4 — Generate the slide plan
+
+Create a file at `{{SLIDES_DIR}}/outline.md` with this structure:
+
+```markdown
+# Presentation Outline
+
+## Meta
+- **Title**: <presentation title>
+- **Author**: <from config or {{args}}>
+- **Audience**: <target audience>
+- **Objective**: <one sentence — what changes in the audience>
+- **Tone**: <tone descriptor>
+- **Duration**: <X minutes (~Y slides)>
+- **Theme**: <active_theme from config>
+
+## Narrative Arc
+<2-3 sentence description of the story arc — how does this presentation move the audience?>
+
+## Slide Plan
+
+### Opening (~20%)
+1. **Title slide** [title-slide] — 0:00 — <hook line>
+2. **The question / the problem** [content] — 1:30 — <what tension do we open with?>
+3. **Why now / why this matters** [content or quote] — 3:00 — <stakes>
+
+### Development (~40%)
+4. **Context or landscape** [content or data] — 4:30 — <background>
+5–9. <Additional development slides — 1 per key idea, evidence point, or section>
+
+### Climax (~20%)
+10. **The insight or turning point** [content] — X:XX — <the "aha" moment>
+11. **The solution / the answer** [content or two-column] — X:XX — <what we propose or conclude>
+
+### Conclusion (~20%)
+12. **Implications** [content] — X:XX — <so what?>
+13. **Call to action** [content] — X:XX — <what do we want the audience to do?>
+14. **Summary / takeaways** [content] — X:XX — <3 key points>
+15. **Closing slide** [title-slide] — X:XX — <final memorable thought>
+
+## Visual Notes
+<Reference DESIGN.md constraints — which slide types from the theme are ideal for which slides above>
+
+## Content Constraints
+- Maximum 40 words per slide body
+- Speaker notes carry the detail — each slide should have 100–200 words of notes
+- Avoid bullet lists longer than 3 items; prefer one strong idea per slide
+```
+
+Fill in all slides with real titles and descriptions based on the topic. Do not use placeholder text — each entry should be a genuine creative decision.
+
+## Step 5 — Confirm with the user
+
+Present a condensed view of the outline (slide numbers, titles, narrative phase) and ask: "Does this narrative arc feel right? Shall I proceed to `aurea.generate` to write the full slides?"
+
+## Principles
+
+- The outline is the hardest creative step — invest time here. A weak outline produces weak slides.
+- Every slide needs a job. If a slide's purpose is unclear, cut it or merge it.
+- The climax slide is the most important in the deck — it must be unmissable.
+- Reference `DESIGN.md` throughout: let the theme's personality shape the tone of slide titles.
+"""

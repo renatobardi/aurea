@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>{{ title | default("Presentation") }}</title>
+{% if author %}<meta name="author" content="{{ author }}">{% endif %}
+
+<style>
+/* reveal.js reset */
+{{ reset_css }}
+</style>
+
+<style>
+/* reveal.js core */
+{{ reveal_css }}
+</style>
+
+<style>
+/* Theme styles */
+{{ theme_css }}
+</style>
+
+<style>
+/* Layout overrides */
+{{ layout_css }}
+</style>
+
+{% if highlight_css %}
+<style>
+/* Syntax highlighting */
+{{ highlight_css }}
+</style>
+{% endif %}
+
+<style>
+/* Aurea presentation overrides */
+.reveal .slides section {
+  text-align: left;
+}
+.reveal pre code {
+  max-height: 400px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="reveal">
+  <div class="slides">
+{% for slide in slides %}
+    <section{% if slide.attributes %} {{ slide.attributes }}{% endif %}>
+      {{ slide.html }}
+{% if slide.notes %}
+      <aside class="notes">{{ slide.notes }}</aside>
+{% endif %}
+    </section>
+{% endfor %}
+  </div>
+</div>
+
+<script>
+/* reveal.js core (UMD bundle) */
+{{ reveal_js }}
+</script>
+
+<script>
+/* highlight.js (UMD build — exposes global hljs) */
+{{ highlight_js }}
+</script>
+
+<script>
+/* marked (UMD build — exposes global marked) */
+{{ marked_js }}
+</script>
+
+<script>
+{{ plugin_stubs }}
+</script>
+
+<script>
+Reveal.initialize({
+  hash: true,
+  slideNumber: false,
+  controls: true,
+  progress: true,
+  center: true,
+  transition: 'slide',
+  plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom ]
+});
+</script>
+
+</body>
+</html>

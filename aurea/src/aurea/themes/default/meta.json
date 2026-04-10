@@ -1,0 +1,18 @@
+{
+  "id": "default",
+  "name": "Default",
+  "category": "general",
+  "tags": ["clean", "minimal", "professional", "neutral"],
+  "mood": "Clean, neutral, professional — suitable for any audience",
+  "colors": {
+    "primary": "#333333",
+    "background": "#ffffff",
+    "text": "#111111",
+    "accent": "#0066cc"
+  },
+  "typography": {
+    "heading": "Helvetica Neue, Helvetica, Arial, sans-serif",
+    "body": "Helvetica Neue, Helvetica, Arial, sans-serif"
+  },
+  "version": "1.0.0"
+}

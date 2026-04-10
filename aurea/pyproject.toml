@@ -1,0 +1,68 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aurea"
+version = "0.1.0"
+description = "Generate high-quality standalone HTML presentations via AI agents"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.8"
+
+# Approximate wheel sizes (for Art. VII <50 MB gate):
+# typer[all]  ~12 MB  (includes rich, click, shellingham)
+# jinja2      ~0.4 MB
+# mistune     ~0.2 MB
+# rich        ~1.5 MB (already included via typer[all])
+# watchdog    ~1.5 MB
+# pyyaml      ~0.5 MB
+# -------------------
+# Core total: ~16 MB (well under 50 MB)
+# Extract extras add: httpx ~3 MB, bs4 ~0.5 MB, cssutils ~1 MB, lxml ~5 MB → +~9 MB total
+dependencies = [
+    "typer[all]>=0.9.0,<0.21",
+    "jinja2>=3.0",
+    "mistune>=2.0.5,<3.1",
+    "rich>=13.0",
+    "watchdog>=3.0",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+extract = [
+    "httpx>=0.25",
+    "beautifulsoup4>=4.12",
+    "cssutils>=2.10",
+    "lxml>=4.9",
+]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "mypy>=1.0",
+    "ruff>=0.1.0",
+    "pyinstaller>=6.0",
+]
+
+[project.scripts]
+aurea = "aurea.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+aurea = [
+    "vendor/**/*",
+    "themes/**/*",
+    "agent_commands/**/*",
+    "templates/**/*",
+]
+
+[tool.mypy]
+python_version = "3.8"
+ignore_missing_imports = true
+warn_unused_ignores = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--tb=short"

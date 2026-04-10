@@ -1,0 +1,1429 @@
+{
+  "version": "1.0.0",
+  "sources": [
+    {
+      "repo": "https://github.com/VoltAgent/awesome-design-md.git",
+      "last_sync": "auto"
+    }
+  ],
+  "themes": [
+    {
+      "id": "default",
+      "name": "Default",
+      "category": "general",
+      "tags": [
+        "clean",
+        "minimal",
+        "professional",
+        "neutral"
+      ],
+      "mood": "Clean, neutral, professional \u2014 suitable for any audience",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111",
+        "accent": "#0066cc"
+      },
+      "typography": {
+        "heading": "Helvetica Neue, Helvetica, Arial, sans-serif",
+        "body": "Helvetica Neue, Helvetica, Arial, sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "default"
+    },
+    {
+      "id": "midnight",
+      "name": "Midnight",
+      "category": "dark",
+      "tags": [
+        "dark",
+        "minimal",
+        "purple",
+        "focused"
+      ],
+      "mood": "Focused, mysterious, elegant \u2014 perfect for technical deep-dives",
+      "colors": {
+        "primary": "#7c3aed",
+        "background": "#0d0d0d",
+        "text": "#e5e5e5",
+        "accent": "#a855f7"
+      },
+      "typography": {
+        "heading": "Inter, system-ui, sans-serif",
+        "body": "Inter, system-ui, sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "midnight"
+    },
+    {
+      "id": "aurora",
+      "name": "Aurora",
+      "category": "dark",
+      "tags": [
+        "dark",
+        "gradient",
+        "teal",
+        "vibrant"
+      ],
+      "mood": "Vibrant, futuristic, energetic \u2014 for product launches and innovation talks",
+      "colors": {
+        "primary": "#10b981",
+        "background": "#0a0a1a",
+        "text": "#f0f0f0",
+        "accent": "#06b6d4"
+      },
+      "typography": {
+        "heading": "Inter, system-ui, sans-serif",
+        "body": "Inter, system-ui, sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "aurora"
+    },
+    {
+      "id": "editorial",
+      "name": "Editorial",
+      "category": "print",
+      "tags": [
+        "serif",
+        "white",
+        "classic",
+        "newspaper"
+      ],
+      "mood": "Authoritative, trustworthy, refined \u2014 for research and thought leadership",
+      "colors": {
+        "primary": "#1a1a1a",
+        "background": "#fafafa",
+        "text": "#1a1a1a",
+        "accent": "#c0392b"
+      },
+      "typography": {
+        "heading": "Georgia, 'Times New Roman', serif",
+        "body": "Georgia, 'Times New Roman', serif"
+      },
+      "version": "1.0.0",
+      "path": "editorial"
+    },
+    {
+      "id": "brutalist",
+      "name": "Brutalist",
+      "category": "experimental",
+      "tags": [
+        "bold",
+        "contrast",
+        "raw",
+        "impact"
+      ],
+      "mood": "Bold, provocative, unconventional \u2014 for talks meant to make an impact",
+      "colors": {
+        "primary": "#000000",
+        "background": "#ffffff",
+        "text": "#000000",
+        "accent": "#ff0000"
+      },
+      "typography": {
+        "heading": "Impact, 'Arial Black', sans-serif",
+        "body": "Arial, sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "brutalist"
+    },
+    {
+      "id": "airbnb",
+      "name": "Airbnb Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "airbnb",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "airtable",
+      "name": "Airtable Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "airtable",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "apple",
+      "name": "Apple Inspired Design System",
+      "category": "tech",
+      "tags": [
+        "tech",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "apple",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "bmw",
+      "name": "Bmw Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "bmw",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "cal",
+      "name": "Cal Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "cal",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "claude",
+      "name": "Claude Inspired Design System",
+      "category": "ai",
+      "tags": [
+        "ai",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "claude",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "clay",
+      "name": "Clay Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "clay",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "clickhouse",
+      "name": "ClickHouse Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "clickhouse",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "cohere",
+      "name": "Cohere Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "cohere",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "coinbase",
+      "name": "Coinbase Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "coinbase",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "composio",
+      "name": "Composio Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "composio",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "cursor",
+      "name": "Cursor Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "cursor",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "elevenlabs",
+      "name": "Elevenlabs Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "elevenlabs",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "expo",
+      "name": "Expo Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "expo",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "ferrari",
+      "name": "Ferrari Inspired Design System",
+      "category": "automotive",
+      "tags": [
+        "automotive",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "ferrari",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "figma",
+      "name": "Figma Inspired Design System",
+      "category": "design",
+      "tags": [
+        "design",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "figma",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "framer",
+      "name": "Framer Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "framer",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "hashicorp",
+      "name": "HashiCorp Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "hashicorp",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "ibm",
+      "name": "IBM Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "ibm",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "intercom",
+      "name": "Intercom Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "intercom",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "kraken",
+      "name": "Kraken Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "kraken",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "lamborghini",
+      "name": "Lamborghini Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "lamborghini",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "linear.app",
+      "name": "Linear Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "linear.app",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "lovable",
+      "name": "Lovable Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "lovable",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "minimax",
+      "name": "Minimax Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "minimax",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "mintlify",
+      "name": "Mintlify Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "mintlify",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "miro",
+      "name": "Miro Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "miro",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "mistral.ai",
+      "name": "Mistral AI Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "mistral.ai",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "mongodb",
+      "name": "Mongodb Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "mongodb",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "notion",
+      "name": "Notion Inspired Design System",
+      "category": "productivity",
+      "tags": [
+        "productivity",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "notion",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "nvidia",
+      "name": "NVIDIA Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "nvidia",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "ollama",
+      "name": "Ollama Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "ollama",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "opencode.ai",
+      "name": "OpenCode AI Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "opencode.ai",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "pinterest",
+      "name": "Pinterest Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "pinterest",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "posthog",
+      "name": "Posthog Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "posthog",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "raycast",
+      "name": "Raycast Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "raycast",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "renault",
+      "name": "Renault Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "renault",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "replicate",
+      "name": "Replicate Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "replicate",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "resend",
+      "name": "Resend Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "resend",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "revolut",
+      "name": "Revolut Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "revolut",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "runwayml",
+      "name": "RunwayML Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "runwayml",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "sanity",
+      "name": "Sanity Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "sanity",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "semrush",
+      "name": "Semrush Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "semrush",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "sentry",
+      "name": "Sentry Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "sentry",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "spacex",
+      "name": "Spacex Inspired Design System",
+      "category": "aerospace",
+      "tags": [
+        "aerospace",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "spacex",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "spotify",
+      "name": "Spotify Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "spotify",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "stripe",
+      "name": "Stripe Inspired Design System",
+      "category": "fintech",
+      "tags": [
+        "fintech",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "stripe",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "supabase",
+      "name": "Supabase Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "supabase",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "superhuman",
+      "name": "Superhuman Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "superhuman",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "tesla",
+      "name": "Tesla Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "tesla",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "together.ai",
+      "name": "Together AI Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "together.ai",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "uber",
+      "name": "Uber Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "uber",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "vercel",
+      "name": "Vercel Inspired Design System",
+      "category": "devtools",
+      "tags": [
+        "devtools",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "vercel",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "voltagent",
+      "name": "VoltAgent Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "voltagent",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "warp",
+      "name": "Warp Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "warp",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "webflow",
+      "name": "Webflow Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "webflow",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "wise",
+      "name": "Wise Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "wise",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "x.ai",
+      "name": "xAI Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "x.ai",
+      "source": "awesome-design-md"
+    },
+    {
+      "id": "zapier",
+      "name": "Zapier Inspired Design System",
+      "category": "general",
+      "tags": [
+        "general",
+        "imported"
+      ],
+      "mood": "Professional design system",
+      "colors": {
+        "primary": "#333333",
+        "background": "#ffffff",
+        "text": "#111111"
+      },
+      "typography": {
+        "heading": "sans-serif",
+        "body": "sans-serif"
+      },
+      "version": "1.0.0",
+      "path": "zapier",
+      "source": "awesome-design-md"
+    }
+  ]
+}

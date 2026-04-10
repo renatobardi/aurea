@@ -1,0 +1,105 @@
+[command]
+name = "aurea.build"
+description = "Build a standalone HTML presentation from slides (works without CLI)"
+body = """
+# aurea.build — Standalone HTML Build
+
+You are generating a single, self-contained HTML file from the Markdown slides. The output must work offline, in any browser, with zero external dependencies. **This command includes a full fallback for Mode 1 (no CLI installed).**
+
+## Step 1 — Try the CLI first
+
+Check whether the `aurea` CLI is available:
+
+```bash
+aurea --version
+```
+
+If the CLI is available and returns a version number, run:
+
+```bash
+aurea build --output {{OUTPUT_DIR}}/presentation.html
+```
+
+If this succeeds, skip to Step 6 (verification). If the CLI is not available or returns an error, proceed with the manual build below.
+
+## Step 2 — Read all source files
+
+Read these files:
+
+1. `{{CONFIG_PATH}}` — project settings: theme, author, output directory.
+2. `{{DESIGN_MD_PATH}}` — active theme design system.
+3. `{{THEME_CSS_PATH}}` — theme CSS.
+4. `{{THEME_CSS_PATH}}/../layout.css` — layout utilities (if exists).
+5. `{{SLIDES_DIR}}/presentation.md` — the full Markdown presentation.
+
+## Step 3 — Parse the Markdown presentation
+
+Parse `presentation.md`:
+
+1. **Extract YAML frontmatter** (between opening `---` and closing `---`): title, author, theme, date.
+2. **Split slides** on `---` separators (three dashes on a blank line). Each block between separators is one slide.
+3. **Parse each slide**:
+   - Extract `<!-- .slide: ... -->` attribute comment (if present) for CSS classes and data attributes.
+   - Extract `Note:` section (everything after `Note:` on its own line) as speaker notes.
+   - The remaining content is the slide body — convert Markdown to HTML.
+4. **Markdown-to-HTML conversion**: convert headings, paragraphs, lists, bold, italic, code blocks, and inline code.
+
+## Step 4 — Assemble the standalone HTML
+
+Construct the full HTML file. The output **MUST NOT** contain any `<link href="https://...">` or `<script src="https://...">` — all CSS and JS must be inlined.
+
+Structure:
+- `<!doctype html>` with `<meta charset="utf-8">` and viewport tag.
+- `<title>` from frontmatter.
+- `<style>` block inlining: reveal.js core CSS (from vendor if available), theme.css, layout.css.
+- `<div class="reveal"><div class="slides">` containing all `<section>` elements.
+- Each `<section>` has slide attributes from `<!-- .slide: -->` and `<aside class="notes">` for speaker notes.
+- `<script>` block inlining reveal.js core JS (from vendor if available).
+- Reveal.initialize() call with `hash: true`, `slideNumber: true`, `transition: 'slide'`.
+
+**If vendor files are NOT accessible** (pure Mode 1 fallback), include a minimal presentation CSS and JavaScript engine:
+
+Minimal CSS covers: full-viewport layout, single `.present` slide visible, basic typography, hidden notes, progress bar, slide counter.
+
+Minimal JS covers: keyboard navigation (arrow keys, space, Home, End), previous/next button clicks, touch swipe (dx > 50px threshold), URL hash persistence, progress bar and slide counter updates.
+
+Add to body: `<div class="progress">`, `<div class="slide-counter">`, and `<div class="controls">` with prev/next buttons.
+
+## Step 5 — Write the output file
+
+Write the assembled HTML to `{{OUTPUT_DIR}}/presentation.html`.
+
+Ensure:
+- [ ] No `<link href="https://...">` anywhere in the file.
+- [ ] No `<script src="https://...">` anywhere in the file.
+- [ ] No `@import url('https://...')` in any `<style>` block.
+- [ ] The file opens correctly when double-clicked (no server required).
+- [ ] All slides are present as `<section>` elements.
+- [ ] Speaker notes are in `<aside class="notes">` tags.
+
+## Step 6 — Verify and report
+
+```
+Build complete.
+
+Output: {{OUTPUT_DIR}}/presentation.html
+File size: ~X KB
+Slides: N
+Offline: ✓ (all resources inlined)
+Build mode: CLI / vendor inline / minimal fallback
+
+Open the file in your browser to preview:
+  macOS: open {{OUTPUT_DIR}}/presentation.html
+  Windows: start {{OUTPUT_DIR}}/presentation.html
+  Linux: xdg-open {{OUTPUT_DIR}}/presentation.html
+```
+
+If any slides failed to render, list them with the error reason.
+
+## Principles
+
+- **The output HTML MUST NOT contain any `<link href='https://...'>` or `<script src='https://...'>` — all CSS and JS must be inlined.** This is the non-negotiable constraint of Aurea's offline-first design.
+- **Graceful degradation**: CLI → vendor files → minimal fallback. Each level produces a working presentation.
+- **Speaker notes are preserved**: even in the minimal fallback, `<aside class="notes">` tags must be present for presenter tools.
+- **File size target**: aim for <5 MB for the standalone HTML. Warn the user if it exceeds this.
+"""
