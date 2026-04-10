@@ -230,3 +230,150 @@ class TestRunServeStartsServer:
             server.shutdown()
         finally:
             os.chdir(orig)
+
+
+class TestServeWatchMode:
+    """Unit tests for _run_serve_watch — use mocks to control the watch loop."""
+
+    def _make_project(self, tmp_path: Path):
+        output_dir = tmp_path / "output"
+        output_dir.mkdir()
+        (output_dir / "presentation.html").write_text("<html><body>Watch</body></html>")
+        slides_dir = tmp_path / "slides"
+        slides_dir.mkdir()
+        return output_dir, slides_dir
+
+    def _make_server(self, output_dir: Path, port: int):
+        import http.server
+
+        from aurea.commands.serve import _find_available_port, _PresentationHandler
+
+        actual_port = _find_available_port(port, "127.0.0.1")
+        server = http.server.HTTPServer(
+            ("127.0.0.1", actual_port),
+            lambda *a, **kw: _PresentationHandler(*a, directory=str(output_dir), **kw),
+        )
+        return server, actual_port
+
+    def test_watch_mode_observer_stopped_on_keyboard_interrupt(self, tmp_path: Path) -> None:
+        """_run_serve_watch stops observer and server cleanly on KeyboardInterrupt."""
+        import os
+        from unittest.mock import patch
+
+        from aurea.commands.serve import _run_serve_watch
+
+        output_dir, _ = self._make_project(tmp_path)
+        server, _ = self._make_server(output_dir, 9500)
+
+        orig = os.getcwd()
+        try:
+            os.chdir(tmp_path)
+            with patch("aurea.commands.serve.time.sleep", side_effect=KeyboardInterrupt):
+                _run_serve_watch(server=server, serve_dir=output_dir)
+        finally:
+            os.chdir(orig)
+        # Reaching here without a hang confirms cleanup completed
+
+    def test_watch_mode_server_responds_during_watch(self, tmp_path: Path) -> None:
+        """HTTP server responds to requests while the watch loop is running."""
+        import http.client
+        import os
+        import threading
+        import time
+        from unittest.mock import patch
+
+        from aurea.commands.serve import _run_serve_watch
+
+        output_dir, _ = self._make_project(tmp_path)
+        server, port = self._make_server(output_dir, 9510)
+
+        call_count = [0]
+
+        def controlled_sleep(t: float) -> None:
+            call_count[0] += 1
+            if call_count[0] >= 3:
+                raise KeyboardInterrupt
+            time.sleep(0.05)
+
+        status_holder: list = []
+
+        orig = os.getcwd()
+        try:
+            os.chdir(tmp_path)
+
+            def _run() -> None:
+                with patch("aurea.commands.serve.time.sleep", side_effect=controlled_sleep):
+                    _run_serve_watch(server=server, serve_dir=output_dir)
+
+            t = threading.Thread(target=_run, daemon=True)
+            t.start()
+
+            # Poll until server responds (deadline 5 s)
+            deadline = time.perf_counter() + 5.0
+            while time.perf_counter() < deadline:
+                try:
+                    conn = http.client.HTTPConnection("127.0.0.1", port, timeout=1)
+                    conn.request("GET", "/presentation.html")
+                    resp = conn.getresponse()
+                    status_holder.append(resp.status)
+                    resp.read()
+                    break
+                except Exception:
+                    time.sleep(0.05)
+
+            t.join(timeout=5.0)
+        finally:
+            os.chdir(orig)
+
+        assert status_holder and status_holder[0] == 200
+
+    def test_watch_mode_rebuilds_on_slide_change(self, tmp_path: Path) -> None:
+        """Saving a file under slides/ triggers _do_build within 5 s."""
+        import os
+        import threading
+        import time
+        from unittest.mock import patch
+
+        from aurea.commands.serve import _run_serve_watch
+
+        output_dir, slides_dir = self._make_project(tmp_path)
+        server, _ = self._make_server(output_dir, 9520)
+
+        rebuild_called = threading.Event()
+        observer_ready = threading.Event()
+        stop_loop = threading.Event()
+
+        def mock_do_build(**kwargs) -> None:  # type: ignore[misc]
+            rebuild_called.set()
+
+        def controlled_sleep(t: float) -> None:
+            observer_ready.set()  # first sleep call means observer has started
+            if stop_loop.wait(timeout=t):
+                raise KeyboardInterrupt
+
+        orig = os.getcwd()
+        try:
+            os.chdir(tmp_path)
+            with patch("aurea.commands.build._do_build", side_effect=mock_do_build):
+                with patch("aurea.commands.serve.time.sleep", side_effect=controlled_sleep):
+
+                    def _run() -> None:
+                        _run_serve_watch(server=server, serve_dir=output_dir)
+
+                    t = threading.Thread(target=_run, daemon=True)
+                    t.start()
+
+                    # Wait for observer to register watch dirs (signalled by first sleep call)
+                    assert observer_ready.wait(timeout=5.0), "observer did not start"
+                    (slides_dir / "test.md").write_text("# Changed")
+
+                    deadline = time.perf_counter() + 5.0
+                    while time.perf_counter() < deadline and not rebuild_called.is_set():
+                        time.sleep(0.1)
+
+                    stop_loop.set()
+                    t.join(timeout=3.0)
+        finally:
+            os.chdir(orig)
+
+        assert rebuild_called.is_set(), "rebuild not triggered after slide change"
