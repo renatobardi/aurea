@@ -1,0 +1,82 @@
+# {{ project_name }}
+
+A presentation project created with [Aurea](https://github.com/aurea/aurea).
+
+## Quick Start
+
+Your project is set up for **{{ agent }}** with the **{{ theme }}** theme.
+
+### Workflow (7 phases)
+
+```
+/aurea.theme    → Browse and select a theme
+/aurea.outline  → Generate narrative structure and slide plan
+/aurea.generate → Create full Markdown presentation
+/aurea.refine   → Improve specific slides (usage: /aurea.refine <feedback>)
+/aurea.visual   → Generate SVG/CSS visual assets
+/aurea.extract  → Extract a design system from a URL
+/aurea.build    → Build the standalone HTML presentation
+```
+
+Start here: `/aurea.outline "{{ project_name }}"`
+
+### CLI Commands
+
+```bash
+# Build the presentation
+aurea build
+
+# Preview locally
+aurea serve
+
+# Browse themes
+aurea theme list
+aurea theme search "dark minimal"
+
+# Apply a different theme
+aurea theme use midnight
+
+# Watch mode (rebuild on save)
+aurea build --watch
+```
+
+### Project Structure
+
+```
+{{ project_name }}/
+├── .aurea/
+│   ├── config.json          # Project configuration
+│   └── themes/              # Local theme files
+├── slides/
+│   └── presentation.md      # Your Markdown slides
+├── output/
+│   └── presentation.html    # Generated HTML (offline-ready)
+└── README.md
+```
+
+### Slide Format
+
+```markdown
+---
+title: "My Presentation"
+author: "Your Name"
+theme: "{{ theme }}"
+---
+
+# Slide Title
+
+Slide content goes here (≤40 words)
+
+Note: Speaker notes go here. Rich detail, context, talking points.
+
+---
+
+## Next Slide
+
+- Bullet point 1
+- Bullet point 2
+
+Note: More speaker notes.
+```
+
+Separate slides with `---` on a line by itself.

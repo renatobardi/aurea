@@ -1,0 +1,21 @@
+{
+  "id": "figma",
+  "name": "Figma Inspired Design System",
+  "category": "design",
+  "tags": [
+    "design",
+    "imported"
+  ],
+  "mood": "Professional design system",
+  "colors": {
+    "primary": "#333333",
+    "background": "#ffffff",
+    "text": "#111111"
+  },
+  "typography": {
+    "heading": "sans-serif",
+    "body": "sans-serif"
+  },
+  "version": "1.0.0",
+  "source": "awesome-design-md"
+}

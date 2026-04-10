@@ -1,0 +1,24 @@
+/**
+ * Default theme CSS custom properties for reveal.js
+ * Fixture file for testing — minimal but complete.
+ */
+
+:root {
+  --r-background-color: #ffffff;
+  --r-main-color: #111111;
+  --r-main-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --r-main-font-size: 1.1rem;
+  --r-heading-color: #333333;
+  --r-heading-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --r-heading-font-weight: 700;
+  --r-heading-text-transform: none;
+  --r-heading1-size: 2.5em;
+  --r-heading2-size: 1.8em;
+  --r-heading3-size: 1.4em;
+  --r-link-color: #0066cc;
+  --r-link-color-hover: #004499;
+  --r-selection-background-color: #0066cc33;
+  --r-code-font: "Courier New", monospace;
+  --r-block-margin: 20px;
+  --r-line-height: 1.6;
+}

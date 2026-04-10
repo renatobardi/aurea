@@ -1,0 +1,98 @@
+---
+name: aurea.refine
+description: Iteratively improve specific slides in the presentation
+---
+
+# aurea.refine — Targeted Slide Refinement
+
+You are making targeted improvements to an existing presentation. The key discipline here is **surgical precision**: touch only what the user asks to change, and leave everything else intact.
+
+## Step 1 — Read current state
+
+Read these files:
+
+1. `{{CONFIG_PATH}}` — project settings.
+2. `{{DESIGN_MD_PATH}}` — active theme's design system. You will validate changes against this.
+3. `{{SLIDES_DIR}}/presentation.md` — the current presentation source.
+4. `{{SLIDES_DIR}}/outline.md` — the original narrative plan (to verify changes stay aligned).
+
+## Step 2 — Parse refinement instructions
+
+The user's input is: `$ARGUMENTS`
+
+Extract:
+- **Which slides** to modify: slide numbers, slide titles, or a range (e.g., "slides 3-5", "the revenue slide", "the conclusion").
+- **What to change**: the nature of the improvement requested. Common types:
+  - *Content*: rewrite body text, change message, add/remove a point.
+  - *Tone*: make it more formal, more punchy, more empathetic, simpler.
+  - *Length*: condense a wordy slide, expand a thin one.
+  - *Speaker notes*: enrich notes with more detail, examples, or transitions.
+  - *Visuals*: add or update a `<!-- VISUAL: -->` marker.
+  - *Structure*: split one slide into two, or merge two into one.
+  - *Design*: change the `<!-- .slide: class="..." -->` attribute.
+
+If the target slides or desired change are ambiguous, ask one clarifying question before proceeding.
+
+## Step 3 — Apply changes
+
+For each targeted slide:
+
+1. **Locate** the slide in `presentation.md` by its separator block.
+2. **Make the specific change** the user requested.
+3. **Validate** the changed slide against constraints:
+   - Body ≤ 40 words (if body was changed).
+   - Speaker notes present (if notes were removed, add them back).
+   - CSS classes exist in DESIGN.md's slide type inventory.
+   - Do's and Don'ts from DESIGN.md are not violated.
+4. **Do not touch** any other slide — preserve all other content exactly.
+
+### Split slide procedure
+If splitting one slide into two:
+- The original slide becomes slide N.
+- The new slide is inserted as slide N+1 with a new `---` separator.
+- Update the narrative flow in speaker notes so transitions still read smoothly.
+
+### Merge slide procedure
+If merging two slides:
+- Combine their most essential ideas into a single ≤40 word body.
+- Merge speaker notes from both, resolving any redundancy.
+- Remove the separator and second slide block entirely.
+
+## Step 4 — Validate against outline
+
+After changes, verify the presentation still follows the narrative arc in `outline.md`:
+- Opening phase slides are still opening phase material.
+- Climax is still the most impactful slide.
+- The story still flows logically from slide to slide.
+
+If a change breaks the narrative arc, warn the user: "This change affects the story flow. The climax now comes too early / the opening has lost its hook. Consider [specific fix]."
+
+## Step 5 — Show a diff summary
+
+After saving changes, report:
+
+```
+Changes made to presentation.md:
+
+Slide 3 — "The Problem"
+  BEFORE: [original body text]
+  AFTER:  [new body text]
+  Notes:  Updated (added transition to slide 4)
+
+Slide 7 — "Revenue Growth"
+  BEFORE: <!-- VISUAL: generic bar chart -->
+  AFTER:  <!-- VISUAL: Animated bar chart showing YoY growth per region, accent color highlights the leading region -->
+
+Total slides changed: 2 of 15
+No structural changes (no splits or merges).
+```
+
+Ask: "Anything else to refine, or shall we move to `aurea.visual` or `aurea.build`?"
+
+## Principles
+
+- **Surgical, not sweeping**: the user asked to refine, not rewrite. Restraint is a feature.
+- **One slide at a time**: if multiple slides need changes, apply them in sequence and report each one.
+- **The outline is the contract**: if a refinement request contradicts the outline's intent, surface the conflict. Don't silently break the narrative.
+- **Design system compliance is non-negotiable**: every change must honor DESIGN.md's constraints.
+- **Speaker notes carry depth**: when condensing a slide body, move cut content to notes — don't discard it.
