@@ -1,8 +1,12 @@
 name: 2 — Build & Distribute
 
 on:
-  release:
+  release:                                                                                                             
     types: [published]
+  workflow_run:                                                                                                        
+    workflows: ["1 — Lint & Test"]                              
+    types: [completed]            
+    branches: [main]  
 
 jobs:
   build-zipapp:
