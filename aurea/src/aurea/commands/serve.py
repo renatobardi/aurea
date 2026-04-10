@@ -34,10 +34,7 @@ def _find_available_port(preferred: int, host: str, max_tries: int = 100) -> int
                 s.bind((host, port))
                 return port
             except OSError:
-                if port > preferred:
-                    _log.info("Port %d in use, trying %d...", port - 1, port)
-                else:
-                    _log.info("Port %d in use, trying %d...", preferred, preferred + 1)
+                _log.info("Port %d in use, trying %d...", port, port + 1)
     raise AureaError(
         f"Error: no available port in range {preferred}-{preferred + max_tries - 1}"
     )
