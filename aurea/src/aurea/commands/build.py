@@ -66,14 +66,16 @@ def parse_slides(markdown_text: str) -> Presentation:
     front: Dict = {}
     body = markdown_text
 
-    if markdown_text.startswith("---"):
-        parts = markdown_text.split("---", 2)
-        if len(parts) >= 3:
+    # Check for YAML frontmatter: opening --- on line 1, closing --- on its own line
+    if markdown_text.startswith("---\n"):
+        parts = markdown_text.split("\n---\n", 1)
+        if len(parts) == 2 and parts[0].startswith("---"):
             try:
-                front = yaml.safe_load(parts[1]) or {}
+                # Remove leading --- and parse remaining YAML
+                front = yaml.safe_load(parts[0][3:]) or {}
             except yaml.YAMLError:
                 _log.warning("Could not parse YAML frontmatter, using defaults")
-            body = parts[2]
+            body = parts[1]
 
     presentation = Presentation(
         title=str(front.get("title", "")),

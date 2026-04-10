@@ -149,6 +149,10 @@ class DesignExtractor:
         result: Dict[str, str] = {}
         result["text"] = dark_colors[0] if dark_colors else "#111111"
         result["background"] = light_colors[0] if light_colors else "#ffffff"
+        # Surface is typically a slightly different shade from background (for cards, etc.)
+        result["surface"] = (
+            light_colors[1] if len(light_colors) > 1 else result["background"]
+        )
         result["primary"] = (
             accent_candidates[0]
             if accent_candidates

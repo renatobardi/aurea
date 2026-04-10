@@ -284,11 +284,15 @@ def scaffold_project(
         project_root.mkdir(parents=True)
 
     # --- apply defaults notice ---
-    if agent == "claude" and theme == "default":
-        print(
-            "  Using defaults: --agent claude --theme default",
-            file=sys.stderr,
-        )
+    # Print when either agent OR theme is using a default value
+    # This warns users about defaults even if only one was explicitly set
+    if agent == "claude" or theme == "default":
+        msg = "  Using defaults:"
+        if agent == "claude":
+            msg += " --agent claude"
+        if theme == "default":
+            msg += " --theme default"
+        print(msg, file=sys.stderr)
 
     # --- validate and resolve theme ---
     try:

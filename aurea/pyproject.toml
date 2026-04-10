@@ -27,6 +27,7 @@ dependencies = [
     "rich>=13.0",
     "watchdog>=3.0",
     "pyyaml>=6.0",
+    "pygments>=2.10",
 ]
 
 [project.optional-dependencies]
@@ -42,6 +43,7 @@ dev = [
     "mypy>=1.0",
     "ruff>=0.1.0",
     "pyinstaller>=6.0",
+    "shiv>=1.0.0",
 ]
 
 [project.scripts]
