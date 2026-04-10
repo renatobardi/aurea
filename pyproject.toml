@@ -61,9 +61,10 @@ aurea = [
 ]
 
 [tool.mypy]
-python_version = "3.8"
+python_version = "3.9"
 ignore_missing_imports = true
 warn_unused_ignores = true
+disable_error_code = ["import-untyped"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

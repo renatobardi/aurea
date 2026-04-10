@@ -1,4 +1,5 @@
 """Unit tests for CLI entry point (T033)."""
+
 from __future__ import annotations
 
 import json
@@ -56,9 +57,7 @@ class TestThemeCLI:
 
     def test_theme_create(self, tmp_path: Path) -> None:
         theme_dir = tmp_path / "my-theme"
-        result = runner.invoke(
-            app, ["theme", "create", "my-theme", "--output", str(theme_dir)]
-        )
+        result = runner.invoke(app, ["theme", "create", "my-theme", "--output", str(theme_dir)])
         assert result.exit_code == 0
         assert (theme_dir / "DESIGN.md").exists()
 
@@ -82,9 +81,7 @@ class TestBuildCLI:
         try:
             os.chdir(initialized_project)
             output = initialized_project / "output" / "test.html"
-            result = runner.invoke(
-                app, ["build", "--output", str(output)]
-            )
+            result = runner.invoke(app, ["build", "--output", str(output)])
             assert output.exists() or result.exit_code != 0
         finally:
             os.chdir(orig)

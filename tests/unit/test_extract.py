@@ -1,4 +1,5 @@
 """Unit tests for theme extraction (T048)."""
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -58,9 +59,7 @@ class TestExtractColorTokens:
 
     def test_ranks_by_frequency(self) -> None:
         # #ffffff appears 5x, #000000 appears 2x
-        css = " ".join(
-            ["color: #ffffff;"] * 5 + ["background: #000000;"] * 2
-        )
+        css = " ".join(["color: #ffffff;"] * 5 + ["background: #000000;"] * 2)
         result = self.extractor.extract_color_tokens([css])
         # Most frequent light color should be background
         assert "#ffffff" in result.values() or "#000000" in result.values()
@@ -80,6 +79,7 @@ class TestGenerateRawDesignMd:
         result = self.extractor.generate_raw_design_md(tokens)
         # Count section headers matching "## N."
         import re
+
         sections = re.findall(r"^## \d+\.", result, re.MULTILINE)
         assert len(sections) == 9, f"Expected 9 sections, got {len(sections)}"
 

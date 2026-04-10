@@ -37,9 +37,7 @@ def fetch_sync(url: str, user_agent: str = "Aurea/1.0", timeout: int = 30) -> st
     try:
         import httpx
     except ImportError:
-        raise AureaError(
-            "httpx is not installed. Run: pip install aurea[extract]"
-        )
+        raise AureaError("httpx is not installed. Run: pip install aurea[extract]")
 
     headers = {"User-Agent": user_agent}
     try:
@@ -48,15 +46,11 @@ def fetch_sync(url: str, user_agent: str = "Aurea/1.0", timeout: int = 30) -> st
             response.raise_for_status()
             return response.text
     except httpx.TimeoutException:
-        raise AureaError(
-            f"Request timed out after {timeout}s. Try --timeout {timeout * 2}"
-        )
+        raise AureaError(f"Request timed out after {timeout}s. Try --timeout {timeout * 2}")
     except httpx.HTTPStatusError as exc:
         code = exc.response.status_code
         if code == 403:
-            raise AureaError(
-                "HTTP 403 forbidden — site may require authentication"
-            )
+            raise AureaError("HTTP 403 forbidden — site may require authentication")
         if code == 404:
             raise AureaError("HTTP 404 — URL not found")
         raise AureaError(f"HTTP {code} error fetching {url}")

@@ -1,4 +1,5 @@
 """Unit tests for the serve command (T050)."""
+
 from __future__ import annotations
 
 import socket
@@ -135,9 +136,7 @@ class TestRunServeStartsServer:
 
             server = http.server.HTTPServer(
                 ("127.0.0.1", port),
-                lambda *args, **kw: _PresentationHandler(
-                    *args, directory=str(output_dir), **kw
-                ),
+                lambda *args, **kw: _PresentationHandler(*args, directory=str(output_dir), **kw),
             )
 
             t = threading.Thread(target=server.serve_forever, daemon=True)

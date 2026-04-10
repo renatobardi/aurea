@@ -1,4 +1,5 @@
 """Integration tests for `aurea init` end-to-end (T018)."""
+
 from __future__ import annotations
 
 import json
@@ -35,9 +36,7 @@ class TestInitBasic:
             app,
             ["init", str(tmp_path / "proj"), "--agent", "claude", "--theme", "default"],
         )
-        config = json.loads(
-            (tmp_path / "proj" / ".aurea" / "config.json").read_text()
-        )
+        config = json.loads((tmp_path / "proj" / ".aurea" / "config.json").read_text())
         assert config["agent"] == "claude"
         assert config["theme"] == "default"
         assert "themes_dir" in config

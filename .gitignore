@@ -6,6 +6,7 @@ __pycache__/
 .Python
 *.egg-info/
 dist/
+!src/aurea/vendor/revealjs/dist/
 # build/ is intentionally NOT ignored — it contains the PyInstaller spec (build/aurea.spec)
 # Only ignore build artifacts inside it:
 build/dist/

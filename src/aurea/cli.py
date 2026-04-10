@@ -51,28 +51,18 @@ def init_command(
         Optional[str],
         typer.Argument(help="Directory name for the new project."),
     ] = None,
-    agent: Annotated[
-        str, typer.Option("--agent", help="Target AI agent id.")
-    ] = "claude",
-    theme: Annotated[
-        str, typer.Option("--theme", help="Initial theme id.")
-    ] = "default",
-    here: Annotated[
-        bool, typer.Option("--here", help="Initialize in current directory.")
-    ] = False,
+    agent: Annotated[str, typer.Option("--agent", help="Target AI agent id.")] = "claude",
+    theme: Annotated[str, typer.Option("--theme", help="Initial theme id.")] = "default",
+    here: Annotated[bool, typer.Option("--here", help="Initialize in current directory.")] = False,
     force: Annotated[
         bool, typer.Option("--force", help="Overwrite if project directory exists.")
     ] = False,
-    no_git: Annotated[
-        bool, typer.Option("--no-git", help="Skip git init.")
-    ] = False,
+    no_git: Annotated[bool, typer.Option("--no-git", help="Skip git init.")] = False,
     commands_dir: Annotated[
         Optional[str],
         typer.Option("--commands-dir", help="Override commands directory path."),
     ] = None,
-    lang: Annotated[
-        str, typer.Option("--lang", help="Language for generated templates.")
-    ] = "en",
+    lang: Annotated[str, typer.Option("--lang", help="Language for generated templates.")] = "en",
 ) -> None:
     """Initialize a new Aurea presentation project."""
     from aurea.commands.init import scaffold_project
@@ -106,12 +96,8 @@ def build_command(
         Optional[str],
         typer.Option("--theme", help="Override active theme."),
     ] = None,
-    minify: Annotated[
-        bool, typer.Option("--minify", help="Minify HTML output.")
-    ] = False,
-    watch: Annotated[
-        bool, typer.Option("--watch", help="Watch for changes and rebuild.")
-    ] = False,
+    minify: Annotated[bool, typer.Option("--minify", help="Minify HTML output.")] = False,
+    watch: Annotated[bool, typer.Option("--watch", help="Watch for changes and rebuild.")] = False,
     embed_fonts: Annotated[
         bool, typer.Option("--embed-fonts", help="Inline web fonts as base64.")
     ] = False,
@@ -137,9 +123,7 @@ def serve_command(
     port: Annotated[
         int, typer.Option("--port", help="Preferred port (tries sequential if occupied).")
     ] = 8000,
-    host: Annotated[
-        str, typer.Option("--host", help="Bind address.")
-    ] = "127.0.0.1",
+    host: Annotated[str, typer.Option("--host", help="Bind address.")] = "127.0.0.1",
     watch: Annotated[
         bool, typer.Option("--watch", help="Rebuild on file changes and reload.")
     ] = False,
@@ -164,12 +148,8 @@ def extract_command(
         Optional[str],
         typer.Option("--name", help="Output theme id/directory name."),
     ] = None,
-    depth: Annotated[
-        int, typer.Option("--depth", help="Crawl depth.")
-    ] = 1,
-    raw: Annotated[
-        bool, typer.Option("--raw", help="Skip semantic token interpretation.")
-    ] = False,
+    depth: Annotated[int, typer.Option("--depth", help="Crawl depth.")] = 1,
+    raw: Annotated[bool, typer.Option("--raw", help="Skip semantic token interpretation.")] = False,
     use: Annotated[
         bool, typer.Option("--use", help="Apply extracted theme after extraction.")
     ] = False,
@@ -179,17 +159,13 @@ def extract_command(
     user_agent: Annotated[
         str, typer.Option("--user-agent", help="HTTP User-Agent header.")
     ] = "Aurea/1.0",
-    delay: Annotated[
-        float, typer.Option("--delay", help="Delay between page requests.")
-    ] = 1.0,
+    delay: Annotated[float, typer.Option("--delay", help="Delay between page requests.")] = 1.0,
 ) -> None:
     """Extract a design system from a URL and save it as a reusable theme."""
     try:
         from aurea.commands.extract import run_extract
     except ImportError:
-        raise AureaError(
-            "Extract dependencies missing. Run: pip install aurea[extract]"
-        )
+        raise AureaError("Extract dependencies missing. Run: pip install aurea[extract]")
 
     run_extract(
         url=url,
@@ -224,9 +200,7 @@ def theme_search_command(
     category: Annotated[
         Optional[str], typer.Option("--category", help="Filter by category.")
     ] = None,
-    tag: Annotated[
-        Optional[str], typer.Option("--tag", help="Filter by tag.")
-    ] = None,
+    tag: Annotated[Optional[str], typer.Option("--tag", help="Filter by tag.")] = None,
     format_: Annotated[
         str, typer.Option("--format", help="Output format: table or json.")
     ] = "table",

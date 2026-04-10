@@ -1,4 +1,5 @@
 """Integration tests for aurea extract (T047)."""
+
 from __future__ import annotations
 
 import http.server

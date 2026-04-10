@@ -120,6 +120,7 @@ def substitute_placeholders(
 # Theme resolution
 # ---------------------------------------------------------------------------
 
+
 def _global_themes_dir() -> Path:
     """Return the path to the bundled themes directory."""
     return Path(__file__).parent.parent / "themes"
@@ -354,9 +355,7 @@ def scaffold_project(
             "sources": [],
             "themes": [meta],
         }
-        local_registry_path.write_text(
-            json.dumps(registry_data, indent=2), encoding="utf-8"
-        )
+        local_registry_path.write_text(json.dumps(registry_data, indent=2), encoding="utf-8")
 
     _log.info("  + %s", local_registry_path.relative_to(project_root))
 

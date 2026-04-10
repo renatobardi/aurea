@@ -164,9 +164,7 @@ def resolve_theme(
         _validate_design_md(global_theme / "DESIGN.md", theme_id)
         return theme_id, global_theme
 
-    raise AureaError(
-        "Error: no theme set. Run 'aurea theme use <id>' first"
-    )
+    raise AureaError("Error: no theme set. Run 'aurea theme use <id>' first")
 
 
 def _validate_design_md(design_md_path: Path, theme_id: str) -> None:
@@ -305,9 +303,7 @@ window.RevealZoom = function () {
         "reveal_css": _read(vendor / "reveal.css"),
         "theme_css": _read(theme_dir / "theme.css"),
         "layout_css": _read(theme_dir / "layout.css"),
-        "highlight_css": _read(
-            vendor / "plugin" / "highlight" / "monokai.css"
-        ),
+        "highlight_css": _read(vendor / "plugin" / "highlight" / "monokai.css"),
         "reveal_js": _read(vendor / "reveal.js"),
         # UMD builds: no import/export statements, safe to inline directly.
         "highlight_js": _read(vendor_root / "highlight.min.js"),
@@ -397,9 +393,7 @@ def _do_build(
     presentation = parse_slides(md_text)
 
     if not presentation.slides:
-        _log.error(
-            "Error: no slides found in '%s'. Check '---' separators", src
-        )
+        _log.error("Error: no slides found in '%s'. Check '---' separators", src)
         sys.exit(1)
 
     # Resolve theme
@@ -489,7 +483,7 @@ def _run_watch(
             pass
 
     class _Handler(FileSystemEventHandler):
-        def on_any_event(self, event) -> None:  # type: ignore[override]
+        def on_any_event(self, event) -> None:
             nonlocal _debounce_timer
             with _lock:
                 if _debounce_timer:
