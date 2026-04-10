@@ -1,160 +1,589 @@
-# Aurea
+# Aurea v0.1.0
 
-Toolkit for generating high-quality standalone HTML presentations via AI agents. Write slides in Markdown, use structured prompt templates to guide any AI agent through the creation workflow, and get a reveal.js presentation that works offline in any browser.
+Generate high-quality, standalone HTML presentations via AI agents. Write slides in Markdown, guide your agent through a structured workflow, and get a beautiful reveal.js presentation that works offline—no design skills or CSS required.
 
-## How it works
+## Why Aurea?
 
-1. `aurea init my-talk` — scaffold a project with your AI agent's command directory populated
-2. Run `/aurea.outline`, `/aurea.generate`, `/aurea.refine`, `/aurea.visual` in your agent
-3. `aurea build` — compile Markdown slides into a standalone HTML file (~300 KB, zero external dependencies)
-4. `aurea serve` — live preview with hot reload
+- **Standalone HTML**: All CSS, JavaScript, and fonts inlined. Works offline in any browser. Send via email, USB stick, airplane mode.
+- **AI-Guided Workflow**: 7 structured prompt templates guide your agent through outline → generate → refine → visual → build.
+- **64 Professional Themes**: 5 original designs + 59 imported from real design systems (Apple, Stripe, Linear, Figma, Notion, etc.).
+- **4 Distribution Modes**: Use templates in your agent, run the CLI, or grab a standalone executable. All produce identical output.
+- **Zero Design Skills Required**: No CSS, no reveal.js config, no design knowledge. Focus on content; let your agent and Aurea handle the rest.
+- **Python 3.8+**: Runs on Windows 7+, macOS 10.13+, Linux glibc 2.17+. Designed for corporate environments.
 
-No design skills required. No CSS, no reveal.js configuration.
+## Quick Start
 
-## Installation
+### 1. Initialize a Project
 
-**pip / uv / pipx** (recommended for developers)
 ```bash
+# Install Aurea
 pip install aurea
-# or
-uv tool install aurea
-```
+# or: uv tool install aurea
+# or: download standalone from releases
 
-**Zipapp** (single file, Python 3.8+, no pip needed)
-```bash
-curl -L https://github.com/renatobardi/aurea/releases/latest/download/aurea.pyz -o aurea.pyz
-python aurea.pyz --version
-```
-
-**Standalone executable** (no Python required, Windows/macOS/Linux)
-```bash
-# Download aurea.exe / aurea / aurea.app from GitHub Releases
-```
-
-**Zero-install** (copy & paste, no CLI, no Python)
-```
-Copy src/aurea/agent_commands/<your-agent>/ into your agent's commands directory.
-All 7 prompts work independently — no CLI needed.
-```
-
-## Quickstart
-
-```bash
-# Create a project
+# Create a new presentation
 aurea init my-talk --agent claude --theme stripe
-
 cd my-talk
-
-# In your AI agent, run the workflow commands:
-# /aurea.outline "Talk on distributed systems for senior engineers"
-# /aurea.generate
-# /aurea.refine "Make slide 3 more concrete with numbers"
-# /aurea.visual
-# /aurea.build
-
-# Or build directly from existing slides:
-aurea build
-
-# Preview
-aurea serve
-# → http://127.0.0.1:8000/presentation.html
 ```
 
-## Supported AI agents
-
-| Agent | Commands directory | Format |
-|-------|--------------------|--------|
-| Claude Code | `.claude/commands/` | `.md` |
-| Gemini CLI | `.gemini/commands/` | `.toml` |
-| GitHub Copilot | `.github/copilot-instructions/` | `.agent.md` |
-| Windsurf | `.windsurf/commands/` | `.md` |
-| Devin | `.devin/commands/` | `.md` |
-| ChatGPT | `.chatgpt/commands/` | `.md` |
-| Cursor | `.cursor/commands/` | `.md` |
-| Generic | `commands/` | `.md` |
-
-## Themes
-
-64 themes included: 5 original designs + 59 imported from [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md).
-
-```bash
-aurea theme list                        # browse all 64 themes
-aurea theme search "dark minimal"       # search by mood/style
-aurea theme info stripe                 # colors, typography, mood
-aurea theme use linear                  # apply to current project
-aurea theme create my-brand             # scaffold a custom theme
-```
-
-## Theme extraction
-
-Extract a design system from any public URL:
-
-```bash
-aurea extract https://linear.app --name linear-custom
-```
-
-Generates `DESIGN.md` + `theme.css` + `layout.css` + `meta.json` from the site's CSS tokens.
-
-## Build options
-
-```bash
-aurea build                             # slides/ → output/presentation.html
-aurea build --theme midnight            # override active theme
-aurea build --minify                    # smaller output
-aurea build --embed-fonts               # embed woff2 fonts as base64
-aurea build --watch                     # rebuild on file changes
-aurea serve --watch                     # serve + rebuild + reload
-```
-
-## Project structure
-
-After `aurea init`:
-
+This creates:
 ```
 my-talk/
 ├── .aurea/
-│   ├── config.json          # active agent + theme
-│   └── themes/
-│       ├── stripe/          # DESIGN.md, theme.css, layout.css, meta.json
-│       └── registry.json    # local theme index
-├── .claude/commands/        # 7 prompt templates (agent-specific)
-├── slides/                  # your Markdown files go here
-├── output/                  # presentation.html generated here
-└── README.md
+│   ├── config.json              # Project settings (agent, theme)
+│   └── themes/stripe/           # Stripe theme (DESIGN.md, CSS, layout)
+├── .claude/commands/            # 7 agent command templates
+├── slides/                       # Your Markdown slides go here
+├── output/                       # HTML output directory
+└── README.md                     # Project guide
 ```
 
-## Output
+### 2. Create Your Presentation
 
-The generated HTML is 100% standalone:
-- reveal.js 5.x inlined
-- All CSS inlined
-- highlight.js for syntax highlighting
-- No `<link href="https://...">` or `<script src="https://...">`
-- Works offline, in email, on a USB stick
+In your AI agent (Claude Code, Gemini CLI, ChatGPT, etc.):
+
+```
+/aurea.outline "Talk on microservices for senior engineers"
+```
+
+The agent reads the design system and creates `slides/outline.md` with:
+- Audience, objectives, tone
+- Narrative arc (opening → development → climax → conclusion)
+- Slide plan with timing estimates
+
+Then:
+```
+/aurea.generate      # Create full slides from outline
+/aurea.refine        # Edit slides (e.g., "Add more data to slide 3")
+/aurea.visual        # Add SVG/CSS visuals to slides
+/aurea.build         # Compile to HTML
+```
+
+### 3. Preview & Share
+
+```bash
+# Start live preview
+aurea serve --watch
+
+# Open http://127.0.0.1:8000/presentation.html
+# Edit slides, auto-rebuild on save
+
+# Output is ready to share
+# Send output/presentation.html via email, USB, cloud storage
+# Works offline in any browser
+```
+
+---
+
+## Installation
+
+### Option 1: pip (Standard)
+
+```bash
+pip install aurea
+
+# With optional theme extraction:
+pip install aurea[extract]
+```
+
+**Requires:** Python 3.8+
+
+### Option 2: Zipapp (Single File)
+
+```bash
+# Download from releases
+curl -L https://github.com/renatobardi/aurea/releases/latest/download/aurea.pyz -o aurea.pyz
+
+# Run with Python
+python aurea.pyz init my-talk --agent claude --theme stripe
+```
+
+**Requires:** Python 3.8+
+
+### Option 3: Standalone Executable (No Python)
+
+Download from [releases page](https://github.com/renatobardi/aurea/releases):
+
+- **Windows**: `aurea.exe` (40 MB)
+- **macOS (Intel)**: `aurea` (40 MB)
+- **macOS (Apple Silicon)**: `aurea.app` (40 MB)
+- **Linux**: `aurea` (40 MB)
+
+No Python required. Works on Windows 7+, macOS 10.13+, Linux glibc 2.17+.
+
+### Option 4: Zero-Install (No CLI)
+
+Copy agent command templates from this repo:
+
+```bash
+git clone https://github.com/renatobardi/aurea.git
+cp -r aurea/src/aurea/agent_commands/claude ~/.claude/commands/
+```
+
+Use agent commands in your AI agent. No CLI needed. Works completely offline.
+
+---
+
+## Usage
+
+### Initialize a Project
+
+```bash
+aurea init <project-name> [options]
+
+Options:
+  --agent {claude|gemini|copilot|windsurf|devin|chatgpt|cursor|generic}
+           AI agent to configure (default: claude)
+  --theme {theme-id}
+           Theme to use (default: default)
+  --here   Initialize in current directory instead of creating subdirectory
+  --force  Overwrite existing project
+  --no-git Skip git initialization
+  --lang {en|pt-br|...}
+           Language for templates (default: en)
+```
+
+### Build
+
+```bash
+aurea build [options]
+
+Options:
+  --input <file>      Input Markdown file (default: slides/presentation.md)
+  --output <file>     Output HTML file (default: output/presentation.html)
+  --theme <id>        Override active theme
+  --minify            Minify HTML (smaller output)
+  --embed-fonts       Embed fonts as base64 (larger file, works without @font-face)
+  --watch             Rebuild on file changes
+```
+
+### Preview
+
+```bash
+aurea serve [options]
+
+Options:
+  --port <n>    Server port (default: 8000, auto-increment if busy)
+  --host <addr> Server address (default: 127.0.0.1)
+  --watch       Auto-rebuild on file changes + live reload
+```
+
+### Theme Management
+
+```bash
+# List all available themes
+aurea theme list
+
+# Search themes by keyword
+aurea theme search "dark minimal"
+
+# Show theme details and colors
+aurea theme info stripe
+
+# Display theme design system
+aurea theme show stripe
+
+# Apply theme to current project
+aurea theme use linear
+
+# Create custom theme
+aurea theme create my-brand
+```
+
+### Extract Design System from URL
+
+```bash
+aurea extract https://linear.app --name linear-custom
+
+Options:
+  --name <id>      Theme name (required)
+  --depth <n>      Crawl depth (default: 1, max: 3)
+  --raw            Generate raw tokens without AI refinement
+  --use            Apply extracted theme to current project
+  --timeout <s>    HTTP timeout (default: 30)
+```
+
+---
+
+## Themes
+
+**64 themes included** in the registry:
+
+### Original Designs (5)
+- `default` — Clean, minimal, professional
+- `midnight` — Dark, elegant, high contrast
+- `aurora` — Colorful, modern, gradient-heavy
+- `editorial` — Typography-focused, print-inspired
+- `brutalist` — Harsh, raw, anti-design
+
+### Imported from [awesome-design-md](https://github.com/VoltAgent/awesome-design-md) (59)
+
+Design systems from real companies and projects:
+- **Tech**: stripe, linear, apple, figma, notion, vercel, github, slite
+- **Automotive**: ferrari, lamborghini, porsche
+- **AI/ML**: openai, anthropic, midjourney, stability, huggingface
+- **Finance**: stripe, square, wise, kraken, coinbase
+- **Social**: twitter, instagram, tiktok, discord
+- **Design**: dribbble, behance, figma, framer
+- **And 40+ more...**
+
+Search by mood or category:
+
+```bash
+aurea theme search "dark minimal elegant"
+aurea theme search --category design --tag gradient
+```
+
+---
+
+## Project Structure
+
+After `aurea init my-talk`:
+
+```
+my-talk/
+├── .aurea/                          # Aurea configuration
+│   ├── config.json                  # Project settings (agent, theme)
+│   └── themes/
+│       ├── stripe/                  # Active theme files
+│       │   ├── DESIGN.md            # Design system specification
+│       │   ├── theme.css            # Theme stylesheet
+│       │   ├── layout.css           # Grid & layout overrides
+│       │   └── meta.json            # Theme metadata
+│       └── registry.json            # Local theme index
+├── .claude/commands/                # Agent command templates
+│   ├── aurea.outline.md             # Step 1: Plan narrative
+│   ├── aurea.generate.md            # Step 2: Create slides
+│   ├── aurea.refine.md              # Step 3: Edit slides
+│   ├── aurea.visual.md              # Step 4: Add visuals
+│   ├── aurea.theme.md               # Manage themes
+│   ├── aurea.extract.md             # Extract design from URL
+│   └── aurea.build.md               # Build to HTML
+├── slides/                           # Your Markdown files
+│   ├── presentation.md              # Main slides (or multiple files)
+│   └── .gitkeep
+├── output/                           # Generated output
+│   ├── presentation.html            # Standalone reveal.js presentation
+│   └── .gitkeep
+└── README.md                         # Project guide
+```
+
+---
+
+## Slide Format
+
+### Basic Slides
+
+```markdown
+---
+title: "My Presentation"
+author: "Your Name"
+theme: stripe
+---
+
+# Slide 1: Title
+
+This is your first slide.
+
+---
+
+# Slide 2: Content
+
+- Bullet 1
+- Bullet 2
+
+```code
+console.log("code blocks are supported");
+```
+
+---
+
+# Slide 3: With Speaker Notes
+
+Main slide content here.
+
+Note: Speaker notes go here. Not visible in presentation mode (unless notes plugin enabled).
+```
+
+### Slide Attributes
+
+```markdown
+# Slide with Custom Background
+
+<!-- .slide: data-background-color="#ffffff" data-transition="fade" -->
+
+Custom reveal.js attributes work here.
+```
+
+### Rules
+
+- **Separator**: Use `---` on its own line to separate slides
+- **Word limit**: Max 40 words per slide (excluding speaker notes) — keeps slides focused
+- **Speaker notes**: Start with `Note:` on its own line
+- **Code blocks**: Fenced with ` ``` ` — syntax highlighting automatic (Pygments)
+- **Attributes**: HTML comment with `<!-- .slide: ... -->` for reveal.js options
+
+---
+
+## Frontmatter
+
+The YAML block at the top of `presentation.md`:
+
+```yaml
+---
+title: "My Presentation Title"
+author: "Your Name"
+theme: stripe
+---
+```
+
+**Fields:**
+- `title`: Presentation title (appears in browser tab and HTML metadata)
+- `author`: Author name (HTML metadata)
+- `theme`: Default theme (overridable with `aurea build --theme`)
+
+---
+
+## Output Guarantee
+
+The generated HTML is **100% standalone**:
+
+✅ **Included:**
+- reveal.js 5.2.1 core (inlined)
+- All CSS (theme + reveal.js + syntax highlighting)
+- Fonts (as CSS custom properties or base64)
+- Syntax highlighting definitions
+
+❌ **NOT included:**
+- External CSS links (`<link href="https://...">`)
+- External script tags (`<script src="https://...">`)
+- CDN references
+- Web fonts via Google Fonts API
+
+**Result:** Works offline in any browser, anytime, anywhere. Email it, put it on a USB stick, open it on an airplane.
+
+---
+
+## Design System (DESIGN.md)
+
+Each theme includes a `DESIGN.md` with **9 required sections**:
+
+1. **Visual Theme** — Overall character, mood, inspiration
+2. **Color Palette** — Named colors with semantic roles (primary, secondary, background, surface, text, accent)
+3. **Typography** — Heading and body font families, sizes, weights, line heights
+4. **Components** — Buttons, cards, code blocks, form elements, visual styles
+5. **Layout** — Grid, spacing, proportions, alignment rules
+6. **Depth** — Shadows, z-index layers, 3D effects if applicable
+7. **Do's & Don'ts** — Visual guidelines (what works, what doesn't)
+8. **Responsive** — Mobile breakpoints, touch targets, readability at different sizes
+9. **Agent Prompt Guide** — Instructions for AI agents on how to design slides using this theme
+
+---
+
+## Agent Commands (7 Templates)
+
+All 7 commands follow the same pattern:
+
+1. **Load context** (DESIGN.md, config, current slides)
+2. **Generate or refine** (using design system guidance)
+3. **Validate** (against design system constraints)
+4. **Output** (markdown to slides directory)
+
+### Workflow Phases
+
+| Command | Input | Output | Purpose |
+|---------|-------|--------|---------|
+| `/aurea.outline` | Topic + audience | `slides/outline.md` | Plan narrative structure |
+| `/aurea.generate` | Outline + DESIGN.md | `slides/presentation.md` | Create full slides |
+| `/aurea.refine` | Feedback | Updated slides | Edit & improve |
+| `/aurea.visual` | Slide list | Updated slides with visuals | Add SVG/CSS/mermaid |
+| `/aurea.theme` | Theme ID | Updated theme in .aurea/ | Manage themes |
+| `/aurea.extract` | URL | New DESIGN.md + CSS | Extract design system |
+| `/aurea.build` | (none) | `output/presentation.html` | Compile to HTML |
+
+Each command is independent and can be used standalone.
+
+---
+
+## Examples
+
+### Example 1: Quick Presentation (Zipapp)
+
+```bash
+python aurea.pyz init "Kubernetes for Devs" --agent claude --theme linear
+cd "Kubernetes for Devs"
+
+# Use in Claude Code:
+# /aurea.outline "Kubernetes for developers, 30 min talk, hands-on audience"
+# /aurea.generate
+# /aurea.refine "Add more YAML examples to slide 4"
+# /aurea.visual
+# /aurea.build
+
+aurea serve --watch
+# Open http://127.0.0.1:8000/presentation.html
+```
+
+### Example 2: Corporate Deployment (PyInstaller)
+
+```bash
+# IT distributes aurea.exe via SCCM
+# User runs:
+aurea.exe init "Q2 Strategy" --agent claude --theme default
+cd "Q2 Strategy"
+
+# User creates slides/presentation.md manually or with agent
+# Build:
+aurea.exe build --minify --embed-fonts
+
+# Share output/presentation.html via internal portal
+```
+
+### Example 3: Theme Extraction
+
+```bash
+aurea init "Design Showcase" --agent claude
+
+# Extract Stripe's design system
+aurea extract https://stripe.com --name stripe-custom --depth 2
+
+# Apply it
+aurea theme use stripe-custom
+aurea serve --watch
+
+# Now create presentations with Stripe's colors & typography
+```
+
+---
+
+## Supported AI Agents
+
+Aurea works with any AI agent via command templates:
+
+| Agent | Command Dir | Format | Placeholder |
+|-------|-------------|--------|-------------|
+| **Claude Code** | `.claude/commands/` | `.md` | `$ARGUMENTS` |
+| **Gemini CLI** | `.gemini/commands/` | `.toml` | `{{args}}` |
+| **GitHub Copilot** | `.github/copilot-instructions/` | `.agent.md` | `$ARGUMENTS` |
+| **Windsurf** | `.windsurf/commands/` | `.md` | `$ARGUMENTS` |
+| **Devin** | `.devin/commands/` | `.md` | `$ARGUMENTS` |
+| **ChatGPT** | `.chatgpt/commands/` | `.md` | `$ARGUMENTS` |
+| **Cursor** | `.cursor/commands/` | `.md` | `$ARGUMENTS` |
+| **Generic** | `commands/` | `.md` | `$ARGUMENTS` |
+
+Templates are provided for all agents. They're versioned and frozen in distributions.
+
+---
 
 ## Development
 
-```bash
-git clone https://github.com/renatobardi/aurea
-cd aurea
-python -m venv .venv && source .venv/bin/activate
-pip install -e ".[dev,extract]"
+### Setup
 
-pytest                          # all tests
-pytest tests/unit/              # unit only
-pytest --cov=src                # with coverage
-ruff check . && mypy src/       # lint + types
+```bash
+git clone https://github.com/renatobardi/aurea.git
+cd aurea
+
+python -m venv .venv
+source .venv/bin/activate  # or: .venv\Scripts\activate (Windows)
+
+pip install -e ".[dev,extract]"
 ```
 
-Coverage target: ≥ 80% for `src/aurea/`.
+### Commands
 
-## Documentation
+```bash
+# Lint & format
+ruff check .
+ruff format .
 
-- [Architecture](docs/architecture.md) — build pipeline internals
-- [Theme system](docs/theme-system.md) — DESIGN.md format, registry schema
-- [Agent commands](docs/agent-commands.md) — 7 workflow phases explained
-- [Full spec](aurea-spec.md) — complete product specification
+# Type check
+mypy src/
+
+# Tests
+pytest                        # All tests
+pytest tests/unit/            # Unit only
+pytest -k "test_build"        # Single test
+pytest --cov=src              # With coverage
+
+# Build distributions
+python -m PyInstaller ./build/aurea.spec
+python -m shiv -c aurea -o aurea.pyz .
+```
+
+### Testing Requirements
+
+- **Unit tests** (150+): Isolated functions, mock I/O
+- **Integration tests**: End-to-end workflows, real filesystem
+- **Coverage**: ≥80% for `src/aurea/`
+- **All tests must pass** before merge to main
+
+---
+
+## Architecture
+
+See [CLAUDE.md](CLAUDE.md) for:
+- Build pipeline internals
+- Key design decisions
+- Common gotchas
+- Implementation patterns
+
+See [docs/architecture.md](docs/architecture.md) for:
+- Component interactions
+- Data flow
+- Caching & registry system
+
+---
+
+## Limitations & Roadmap
+
+### v0.1.0 Limitations
+
+- **No PDF export** — reveal.js in browser only
+- **No speaker mode** — Notes visible in source, not in presenter view
+- **Single language** — English templates only (localizations planned)
+- **Limited mermaid** — Renders via mistune, not as SVG
+- **No theme marketplace** — Extract manually or use bundled themes
+
+### Planned (Milestone 6+)
+
+- i18n (Portuguese, Spanish, French, Chinese)
+- PDF export (headless Chrome)
+- Remote presenter mode (WebRTC)
+- Theme marketplace & community sharing
+- Mermaid diagram rendering
+- Custom animation presets
+
+---
 
 ## License
 
-MIT
+MIT License — See LICENSE file
+
+---
+
+## Contributing
+
+Contributions welcome! Please:
+
+1. Fork the repo
+2. Create a feature branch (`git checkout -b feat/your-feature`)
+3. Write tests (unit + integration)
+4. Run linting & coverage checks
+5. Open a pull request
+
+---
+
+## Links & Resources
+
+- **GitHub**: https://github.com/renatobardi/aurea
+- **Full Specification**: [aurea-spec.md](aurea-spec.md)
+- **Theme System**: [docs/theme-system.md](docs/theme-system.md)
+- **Agent Commands**: [docs/agent-commands.md](docs/agent-commands.md)
+- **Deployment Guide**: [DEPLOYMENT.md](DEPLOYMENT.md)
+- **Architecture Details**: [docs/architecture.md](docs/architecture.md)
+
+---
+
+**Status**: Production-ready (v0.1.0)  
+**Last Updated**: 2026-04-09  
+**Requires**: Python 3.8+
