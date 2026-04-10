@@ -263,12 +263,69 @@ These are non-negotiable constraints from the spec. Decisions here were delibera
 
 - **Distributable is the source of truth** — The zipapp/exe is what end-users see. If something works in dev but not in distribution, the distribution is broken. Test all four modes: CLI, zipapp, PyInstaller, pip.
 
+## Key Entry Points & Code Paths
+
+**CLI Entry**:
+- `src/aurea/cli.py` — Typer app with command routing (init, build, serve, theme, extract)
+- Each command is a separate function; subcommands route to `theme_app` typer group
+- Note: `cli.py` uses absolute imports and avoids `from __future__ import annotations` (Python 3.8 typing compatibility)
+
+**Command Implementations**:
+- `src/aurea/commands/init.py` — Creates project scaffolding; calls `_tpl.py` for Jinja2 rendering
+- `src/aurea/commands/build.py` — Main pipeline: parse → resolve theme → render → inline
+- `src/aurea/commands/serve.py` — HTTP server with watchdog file observer for hot reload
+- `src/aurea/commands/theme.py` — Theme registry, metadata search, CSS validation
+- `src/aurea/commands/extract.py` — Web scraping with httpx/BeautifulSoup; generates DESIGN.md
+
+**Template Rendering**:
+- `src/aurea/_tpl.py` — Jinja2 environment setup; loads reveal.html.j2 and slide_readme.md.j2
+- Custom filters for theme variables, colors, typography
+- Handles context passing from build.py → Jinja2
+
+**Theme System**:
+- Global registry: `src/aurea/themes/registry.json` (64 themes, metadata)
+- Per-project registry: `.aurea/themes/registry.json` (minimal, only selected theme)
+- Theme structure: `DESIGN.md` (dual-purpose: human doc + parsed by extract.py) + CSS + meta.json
+
+**Logging**:
+- `src/aurea/_log.py` — Configured for logging.INFO level, structured output to stderr
+- All CLI output goes to stdout (for piping); diagnostics to stderr
+
 ## Design Principles
 
 - **Portability first**: Minimize external dependencies, support Windows without Python.
 - **Templates as product**: Prompts are the real value; CLI is convenience.
 - **Autosufficient output**: HTML runs offline, in any browser, no server.
 - **Progressive**: Work from "copy-paste templates" to "full CLI + themes + live preview."
+
+## Common Development Tasks
+
+**Adding a new theme**:
+1. Create `src/aurea/themes/{theme-id}/` with DESIGN.md (9 sections), theme.css, layout.css, meta.json
+2. Add entry to `src/aurea/themes/registry.json` with name, description, tags, colors
+3. Test with `aurea theme list`, `aurea theme info {theme-id}`, `aurea init test --theme {theme-id}`
+4. Run full build test to ensure CSS inlines correctly
+
+**Modifying the build pipeline**:
+- Changes to `src/aurea/commands/build.py` should include both unit tests (mock filesystem) and integration tests (real temp dirs)
+- The 4-step pipeline (parse → resolve → render → inline) is sequential; maintain this order
+- Always test output is valid HTML and offline-capable (no external links)
+
+**Adding extraction features**:
+- Extend `src/aurea/commands/extract.py` carefully — web scraping is fragile
+- Add unit tests with mock HTTP responses (use `httpx_mock` from pytest-httpx)
+- Test with real URLs in integration tests (may fail if site changes)
+
+**Updating themes from awesome-design-md**:
+- Workflow runs nightly via `3-sync-themes.yml`
+- Manual sync: clone awesome-design-md repo, copy designs to `src/aurea/themes/`, rebuild registry
+- Validate all 64 themes still build after changes
+
+**Updating reveal.js**:
+- ⚠️ **Must stay on 5.x** — Do NOT upgrade to 6.x (breaking API changes)
+- Vendor files in `src/aurea/vendor/revealjs/dist/`
+- If updating highlight.js or marked.js, check for ES module syntax (bare `import`/`export` — if present, won't inline)
+- Test full build with syntax highlighting and code blocks
 
 ## Common Pitfalls & Gotchas
 
