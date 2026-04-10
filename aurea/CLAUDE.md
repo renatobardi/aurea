@@ -403,9 +403,58 @@ The **`aurea-spec.md`** file (32 KB) contains:
   - All four modes: CLI (pip), zipapp, PyInstaller exe, zero-install templates
   - Python 3.8 (oldest supported) + 3.12+ (latest)
 
-## Active Technologies
-- Python 3.8+ (target; tested on 3.8 and 3.12+) + `typer[all]>=0.9.0,<0.21`, `jinja2>=3.0`, `mistune>=2.0.5,<3.1`, `rich>=13.0`, `watchdog>=3.0`, `pyyaml>=6.0`; extract extras: `httpx>=0.25`, `beautifulsoup4>=4.12`, `cssutils>=2.10`, `lxml>=4.9` (001-aurea-cli-toolkit)
-- Filesystem only — JSON files, Markdown, CSS, HTML (001-aurea-cli-toolkit)
+## Dependency Map
+
+**Core (always installed)**:
+- `typer[all]>=0.9.0,<0.21` — CLI framework + rich (output formatting)
+- `jinja2>=3.0` — Template rendering
+- `mistune>=2.0.5,<3.1` — Markdown parsing
+- `watchdog>=3.0` — File change monitoring (for hot reload)
+- `pyyaml>=6.0` — YAML parsing (frontmatter in slides)
+- `pygments>=2.10` — Syntax highlighting for code blocks
+
+**Optional [extract]** (for `aurea extract` command):
+- `httpx>=0.25` — Async HTTP client
+- `beautifulsoup4>=4.12` — HTML parsing
+- `cssutils>=2.10` — CSS parsing
+- `lxml>=4.9` — XML parsing (bs4 backend)
+
+**Dev [dev]** (testing, linting, building):
+- `pytest>=7.0` — Unit & integration tests
+- `pytest-cov>=4.0` — Coverage reporting
+- `mypy>=1.0` — Type checking
+- `ruff>=0.1.0` — Linting & formatting
+- `pyinstaller>=6.0` — Standalone binary builds
+- `shiv>=1.0.0` — Zipapp building
+
+**Constraint**: Total install size must be <50 MB (enables zipapp distribution).
+
+## Module Dependencies
+
+```
+cli.py (entry point)
+├── commands/init.py (scaffolding)
+│   └── _tpl.py (Jinja2)
+├── commands/build.py (main pipeline)
+│   ├── _tpl.py (rendering)
+│   ├── commands/theme.py (resolution)
+│   ├── _regex.py (parsing)
+│   └── exceptions.py
+├── commands/serve.py (server)
+│   └── watchdog (file observer)
+├── commands/theme.py (listing, search)
+│   └── exceptions.py
+├── commands/extract.py (web scraping)
+│   ├── _http.py (httpx wrapper)
+│   └── exceptions.py
+└── _log.py (logging)
+```
 
 ## Recent Changes
-- 001-aurea-cli-toolkit: Added Python 3.8+ (target; tested on 3.8 and 3.12+) + `typer[all]>=0.9.0,<0.21`, `jinja2>=3.0`, `mistune>=2.0.5,<3.1`, `rich>=13.0`, `watchdog>=3.0`, `pyyaml>=6.0`; extract extras: `httpx>=0.25`, `beautifulsoup4>=4.12`, `cssutils>=2.10`, `lxml>=4.9`
+- v0.1.0 (2026-04-09): Full M0–M3 implementation, production-ready
+  - CLI: init, build, serve, theme, extract fully working
+  - Themes: 64 total (5 original + 59 from awesome-design-md)
+  - Build: Markdown → standalone HTML with inlined CSS/JS
+  - Extract: Web scraping → DESIGN.md generation
+  - Tests: Unit + integration, 80%+ coverage
+  - Distribution: pip, zipapp, PyInstaller (exe/bin/dmg)
