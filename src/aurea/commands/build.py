@@ -483,7 +483,7 @@ def _run_watch(
             pass
 
     class _Handler(FileSystemEventHandler):
-        def on_any_event(self, event) -> None:  # type: ignore[override]
+        def on_any_event(self, event) -> None:
             nonlocal _debounce_timer
             with _lock:
                 if _debounce_timer:

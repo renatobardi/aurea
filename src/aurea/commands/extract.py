@@ -85,7 +85,9 @@ class DesignExtractor:
 
         # External <link rel="stylesheet"> tags
         for tag in soup.find_all("link", rel=True):
-            rel_vals = tag.get("rel", [])
+            rel_vals = tag.get("rel")
+            if not rel_vals:
+                continue
             if isinstance(rel_vals, list):
                 rel_str = " ".join(rel_vals).lower()
             else:
@@ -94,7 +96,8 @@ class DesignExtractor:
             if "stylesheet" not in rel_str:
                 continue
 
-            href = tag.get("href", "")
+            href_val = tag.get("href", "")
+            href = " ".join(href_val) if isinstance(href_val, list) else (href_val or "")
             if not href:
                 continue
 
@@ -370,7 +373,9 @@ When using this theme:
             links = soup.find_all("a", href=True)
             seen = {self.url}
             for link in links[:20]:  # cap at 20 extra pages
-                href = urllib.parse.urljoin(self.url, link["href"])
+                raw = link["href"]
+                link_href = " ".join(raw) if isinstance(raw, list) else str(raw)
+                href = urllib.parse.urljoin(self.url, link_href)
                 parsed = urllib.parse.urlparse(href)
                 if parsed.netloc != base_netloc:
                     continue
