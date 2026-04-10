@@ -125,7 +125,7 @@ class TestServeWatchMode:
     def _make_server(self, output_dir: Path, port: int):
         import http.server
 
-        from aurea.commands.serve import _PresentationHandler, _find_available_port
+        from aurea.commands.serve import _find_available_port, _PresentationHandler
 
         actual_port = _find_available_port(port, "127.0.0.1")
         server = http.server.HTTPServer(
