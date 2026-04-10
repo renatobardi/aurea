@@ -521,16 +521,25 @@ python -m shiv -c aurea -o aurea.pyz .
 
 ## Architecture
 
+**For developers contributing to Aurea:**
+
 See [CLAUDE.md](CLAUDE.md) for:
-- Build pipeline internals
-- Key design decisions
-- Common gotchas
-- Implementation patterns
+- Project structure and key entry points
+- Build pipeline internals (parse → resolve → render → inline)
+- CLI routing and command implementations
+- Common development tasks (adding themes, modifying pipeline, extraction)
+- Dependency map and module relationships
+- Testing conventions (unit vs. integration)
+- Common pitfalls and design constraints
+- Implementation patterns specific to this project
+
+**For users understanding how presentations are built:**
 
 See [docs/architecture.md](docs/architecture.md) for:
 - Component interactions
-- Data flow
-- Caching & registry system
+- Data flow through the build pipeline
+- Theme system and registry structure
+- Caching and performance considerations
 
 ---
 
@@ -575,12 +584,16 @@ Contributions welcome! Please:
 
 ## Links & Resources
 
+**For End Users:**
 - **GitHub**: https://github.com/renatobardi/aurea
 - **Full Specification**: [aurea-spec.md](aurea-spec.md)
+- **Deployment Guide**: [DEPLOYMENT.md](DEPLOYMENT.md)
+
+**For Developers:**
+- **Developer Guide**: [CLAUDE.md](CLAUDE.md) — Entry points, common tasks, dependencies, gotchas
+- **Architecture Details**: [docs/architecture.md](docs/architecture.md)
 - **Theme System**: [docs/theme-system.md](docs/theme-system.md)
 - **Agent Commands**: [docs/agent-commands.md](docs/agent-commands.md)
-- **Deployment Guide**: [DEPLOYMENT.md](DEPLOYMENT.md)
-- **Architecture Details**: [docs/architecture.md](docs/architecture.md)
 
 ---
 
