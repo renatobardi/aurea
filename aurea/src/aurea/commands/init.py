@@ -7,10 +7,25 @@ import subprocess
 import sys
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Dict, Optional, Tuple
+from typing import Any, Dict, FrozenSet, Optional, Tuple
 
 from aurea._log import _log
 from aurea.exceptions import AureaError
+
+# Required DESIGN.md sections (from FR-020)
+REQUIRED_SECTIONS: FrozenSet[str] = frozenset(
+    {
+        "visual theme",
+        "color palette",
+        "typography",
+        "components",
+        "layout",
+        "depth",
+        "do's",
+        "responsive",
+        "agent prompt",
+    }
+)
 
 # ---------------------------------------------------------------------------
 # Agent configuration
@@ -119,6 +134,22 @@ def _resolve_theme_dir(theme_id: str) -> Path:
             "to find similar themes."
         )
     return theme_dir
+
+
+def _validate_design_md(design_md_path: Path, theme_id: str) -> None:
+    """Raise AureaError if DESIGN.md is missing or lacks any of the 9 required sections."""
+    if not design_md_path.exists():
+        raise AureaError(
+            f"Error: theme '{theme_id}' DESIGN.md missing or invalid (needs 9 sections)"
+        )
+    text = design_md_path.read_text(encoding="utf-8").lower()
+    missing = [s for s in REQUIRED_SECTIONS if s not in text]
+    if missing:
+        raise AureaError(
+            "Error: theme '{t}' DESIGN.md is missing sections: {m}".format(
+                t=theme_id, m=", ".join(sorted(missing))
+            )
+        )
 
 
 def _global_registry() -> Optional[Path]:
@@ -262,6 +293,7 @@ def scaffold_project(
     # --- validate and resolve theme ---
     try:
         global_theme_dir = _resolve_theme_dir(theme)
+        _validate_design_md(global_theme_dir / "DESIGN.md", theme)
     except AureaError as exc:
         _log.error("%s", exc)
         sys.exit(1)

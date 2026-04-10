@@ -95,7 +95,7 @@ def _run_serve_watch(
     server: http.server.HTTPServer,
     serve_dir: Path,
 ) -> None:
-    """Serve + watch mode: rebuild on file changes."""
+    """Serve + watch mode: rebuild on file changes with debounce."""
     from watchdog.events import FileSystemEventHandler
     from watchdog.observers import Observer
 
@@ -105,6 +105,7 @@ def _run_serve_watch(
         str(cwd / ".aurea" / "themes"),
     ]
 
+    _debounce_timer: Optional[threading.Timer] = None
     _lock = threading.Lock()
 
     def _rebuild() -> None:
@@ -125,8 +126,12 @@ def _run_serve_watch(
 
     class _Handler(FileSystemEventHandler):
         def on_any_event(self, event) -> None:  # type: ignore[override]
+            nonlocal _debounce_timer
             with _lock:
-                _rebuild()
+                if _debounce_timer:
+                    _debounce_timer.cancel()
+                _debounce_timer = threading.Timer(0.5, _rebuild)
+                _debounce_timer.start()
 
     observer = Observer()
     handler = _Handler()

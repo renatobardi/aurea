@@ -59,17 +59,14 @@ aurea/
 │   ├── _log.py             # Logging config (structured logging to stderr)
 │   └── __init__.py
 ├── src/aurea/agent_commands/
-│   ├── claude/
-│   │   ├── aurea.outline.md
-│   │   ├── aurea.generate.md
-│   │   ├── aurea.refine.md
-│   │   ├── aurea.visual.md
-│   │   ├── aurea.theme.md
-│   │   ├── aurea.extract.md
-│   │   └── aurea.build.md
-│   ├── gemini/              (same 7 commands, .md format)
-│   ├── copilot/             (same 7 commands, .md format)
-│   └── ... (other agents: windsurf, devin, etc.)
+│   ├── claude/              (7 commands, .md format)
+│   ├── gemini/              (7 commands, .toml format)
+│   ├── copilot/             (7 commands, .agent.md format)
+│   ├── windsurf/            (7 commands, .md format)
+│   ├── devin/               (7 commands, .md format)
+│   ├── chatgpt/             (7 commands, .md format)
+│   ├── cursor/              (7 commands, .md format)
+│   └── generic/             (7 commands, .md format)
 ├── src/aurea/themes/
 │   ├── registry.json        (master index of all themes with metadata)
 │   ├── default/

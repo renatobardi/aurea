@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>{{ title | default("Presentation") }}</title>
-{% if author %}<meta name="author" content="{{ author }}">{% endif %}
+<title>{{ title | default("Presentation") | e }}</title>
+{% if author %}<meta name="author" content="{{ author | e }}">{% endif %}
 
 <style>
 /* reveal.js reset */
