@@ -35,9 +35,7 @@ def _find_available_port(preferred: int, host: str, max_tries: int = 100) -> int
                 return port
             except OSError:
                 _log.info("Port %d in use, trying %d...", port, port + 1)
-    raise AureaError(
-        f"Error: no available port in range {preferred}-{preferred + max_tries - 1}"
-    )
+    raise AureaError(f"Error: no available port in range {preferred}-{preferred + max_tries - 1}")
 
 
 def run_serve(
@@ -51,9 +49,7 @@ def run_serve(
     html_path = Path(input_file) if input_file else cwd / "output" / "presentation.html"
 
     if not html_path.exists():
-        raise AureaError(
-            f"Error: '{html_path}' not found. Run 'aurea build' first"
-        )
+        raise AureaError(f"Error: '{html_path}' not found. Run 'aurea build' first")
 
     serve_dir = html_path.parent
 
@@ -68,9 +64,7 @@ def run_serve(
 
     server = http.server.HTTPServer(
         (host, actual_port),
-        lambda *args, **kwargs: handler_class(
-            *args, directory=str(serve_dir), **kwargs
-        ),
+        lambda *args, **kwargs: handler_class(*args, directory=str(serve_dir), **kwargs),
     )
 
     url = f"http://{host}:{actual_port}/presentation.html"

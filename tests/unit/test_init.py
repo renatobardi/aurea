@@ -1,4 +1,5 @@
 """Unit tests for init command logic (T019)."""
+
 from __future__ import annotations
 
 import json
@@ -16,8 +17,14 @@ from aurea.commands.init import (
 class TestAgentConfig:
     def test_all_8_agents_present(self) -> None:
         expected = {
-            "claude", "gemini", "copilot", "windsurf",
-            "devin", "chatgpt", "cursor", "generic",
+            "claude",
+            "gemini",
+            "copilot",
+            "windsurf",
+            "devin",
+            "chatgpt",
+            "cursor",
+            "generic",
         }
         assert set(AGENT_CONFIG.keys()) == expected
 
@@ -41,9 +48,7 @@ class TestAgentConfig:
         for agent, (_, fmt, _) in AGENT_CONFIG.items():
             if agent == "gemini":
                 continue
-            assert fmt in (".md", ".agent.md"), (
-                f"{agent} should use .md or .agent.md format"
-            )
+            assert fmt in (".md", ".agent.md"), f"{agent} should use .md or .agent.md format"
 
 
 class TestSubstitutePlaceholders:
@@ -71,9 +76,7 @@ class TestSubstitutePlaceholders:
 
     def test_returns_unchanged_when_no_placeholders(self) -> None:
         text = "Hello world"
-        result = substitute_placeholders(
-            text, "a", "b", "c", "d", "e", "f"
-        )
+        result = substitute_placeholders(text, "a", "b", "c", "d", "e", "f")
         assert result == "Hello world"
 
 
@@ -125,10 +128,7 @@ class TestAgentCommandFiles:
     """SC-002: assert all 56 template files exist (7 templates × 8 agents)."""
 
     def _agent_commands_dir(self) -> Path:
-        return (
-            Path(__file__).parent.parent.parent
-            / "src" / "aurea" / "agent_commands"
-        )
+        return Path(__file__).parent.parent.parent / "src" / "aurea" / "agent_commands"
 
     def test_56_template_files_exist(self) -> None:
         base = self._agent_commands_dir()
@@ -145,10 +145,8 @@ class TestAgentCommandFiles:
                 if not fpath.exists():
                     missing.append(str(fpath.relative_to(base.parent.parent.parent)))
 
-        assert not missing, (
-            "Missing {c} template files:\n{m}".format(
-                c=len(missing), m="\n".join(missing)
-            )
+        assert not missing, "Missing {c} template files:\n{m}".format(
+            c=len(missing), m="\n".join(missing)
         )
 
     def test_all_template_files_non_empty(self) -> None:
@@ -164,9 +162,7 @@ class TestAgentCommandFiles:
                 fpath = base / agent / fname
                 if fpath.exists():
                     content = fpath.read_text(encoding="utf-8")
-                    assert len(content) > 50, (
-                        f"Template too short: {fpath}"
-                    )
+                    assert len(content) > 50, f"Template too short: {fpath}"
 
     def test_gemini_templates_are_toml(self) -> None:
         base = self._agent_commands_dir() / "gemini"
@@ -178,10 +174,7 @@ class TestAgentCommandFiles:
 
     def test_extract_template_has_mode1_keywords(self) -> None:
         """FR-028: aurea.extract.md must support Mode 1 (no CLI) fallback."""
-        extract_tmpl = (
-            self._agent_commands_dir()
-            / "claude" / "aurea.extract.md"
-        )
+        extract_tmpl = self._agent_commands_dir() / "claude" / "aurea.extract.md"
         if extract_tmpl.exists():
             content = extract_tmpl.read_text(encoding="utf-8").lower()
             # Must contain keywords indicating agent-native web fetch

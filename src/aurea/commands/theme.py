@@ -41,9 +41,7 @@ def load_registry(project_root: Optional[Path] = None) -> Dict[str, Any]:
 
     if project_root is None:
         project_root = Path.cwd()
-    local_reg = _load_registry_file(
-        project_root / ".aurea" / "themes" / "registry.json"
-    )
+    local_reg = _load_registry_file(project_root / ".aurea" / "themes" / "registry.json")
 
     # Merge: local shadows global
     theme_map: Dict[str, Dict[str, Any]] = {}
@@ -109,9 +107,7 @@ def apply_theme(theme_id: str, project_root: Path) -> None:
     # Find theme source
     local_themes = project_root / ".aurea" / "themes"
     registry = load_registry(project_root)
-    theme_meta = next(
-        (t for t in registry.get("themes", []) if t["id"] == theme_id), None
-    )
+    theme_meta = next((t for t in registry.get("themes", []) if t["id"] == theme_id), None)
 
     if theme_meta is None:
         raise AureaError(
@@ -128,9 +124,7 @@ def apply_theme(theme_id: str, project_root: Path) -> None:
         src_dir = local_candidate
 
     if src_dir is None:
-        raise AureaError(
-            f"Error: theme '{theme_id}' files not found on disk."
-        )
+        raise AureaError(f"Error: theme '{theme_id}' files not found on disk.")
 
     # Copy to local themes (skip if already in place)
     dst_dir = local_themes / theme_id
@@ -144,9 +138,7 @@ def apply_theme(theme_id: str, project_root: Path) -> None:
     # Update config.json
     config_path = project_root / ".aurea" / "config.json"
     if not config_path.exists():
-        raise AureaError(
-            "Error: not in an Aurea project directory (no .aurea/config.json found)"
-        )
+        raise AureaError("Error: not in an Aurea project directory (no .aurea/config.json found)")
     cfg = json.loads(config_path.read_text(encoding="utf-8"))
     cfg["theme"] = theme_id
     config_path.write_text(json.dumps(cfg, indent=2), encoding="utf-8")
@@ -187,9 +179,7 @@ def cmd_list(format_: str = "table") -> None:
 
     for t in sorted(themes, key=lambda x: x.get("id", "")):
         colors = t.get("colors", {})
-        color_str = " ".join(
-            f"[{v}]■[/{v}]" for v in list(colors.values())[:3]
-        )
+        color_str = " ".join(f"[{v}]■[/{v}]" for v in list(colors.values())[:3])
         table.add_row(
             t.get("id", ""),
             t.get("name", ""),
@@ -309,9 +299,7 @@ def cmd_use(theme_id: str) -> None:
     config = project_root / ".aurea" / "config.json"
 
     if not config.exists():
-        _log.error(
-            "Error: not in an Aurea project directory (no .aurea/config.json found)"
-        )
+        _log.error("Error: not in an Aurea project directory (no .aurea/config.json found)")
         sys.exit(1)
 
     try:

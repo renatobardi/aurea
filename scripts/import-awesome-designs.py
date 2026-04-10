@@ -299,8 +299,7 @@ def main() -> int:
     # Clone or update repo
     if not clone_or_update(repo_dir):
         print(
-            "Warning: could not clone/update awesome-design-md. "
-            "Using existing files if available.",
+            "Warning: could not clone/update awesome-design-md. Using existing files if available.",
             file=sys.stderr,
         )
         if not repo_dir.exists():
@@ -309,14 +308,12 @@ def main() -> int:
 
     # Find all design files — repo uses README.md inside design-md/*, fallback to DESIGN.md
     design_mds = sorted(
-        p for p in repo_dir.rglob("README.md")
+        p
+        for p in repo_dir.rglob("README.md")
         if p.parent != repo_dir  # skip root README.md
     )
     if not design_mds:
-        design_mds = sorted(
-            p for p in repo_dir.rglob("DESIGN.md")
-            if p.parent != repo_dir
-        )
+        design_mds = sorted(p for p in repo_dir.rglob("DESIGN.md") if p.parent != repo_dir)
     if not design_mds:
         print("No design files found in repo.", file=sys.stderr)
         return 0

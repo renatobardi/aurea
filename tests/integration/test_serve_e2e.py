@@ -1,4 +1,5 @@
 """Integration tests for aurea serve (T032)."""
+
 from __future__ import annotations
 
 import socket
@@ -23,10 +24,7 @@ class TestServeBasic:
         """Server starts and serves presentation.html."""
         output_dir = tmp_path / "output"
         output_dir.mkdir()
-        (output_dir / "presentation.html").write_text(
-            "<html><body><h1>Test</h1></body></html>"
-        )
-
+        (output_dir / "presentation.html").write_text("<html><body><h1>Test</h1></body></html>")
 
         port = _find_free_port()
         server_started = threading.Event()
@@ -40,9 +38,7 @@ class TestServeBasic:
 
                 server = http.server.HTTPServer(
                     ("127.0.0.1", port),
-                    lambda *a, **kw: _PresentationHandler(
-                        *a, directory=str(output_dir), **kw
-                    ),
+                    lambda *a, **kw: _PresentationHandler(*a, directory=str(output_dir), **kw),
                 )
                 server_started.set()
                 server.handle_request()
@@ -84,9 +80,7 @@ class TestServeBasic:
 
         server = http.server.HTTPServer(
             ("127.0.0.1", port),
-            lambda *a, **kw: _PresentationHandler(
-                *a, directory=str(output_dir), **kw
-            ),
+            lambda *a, **kw: _PresentationHandler(*a, directory=str(output_dir), **kw),
         )
         t = threading.Thread(target=server.handle_request, daemon=True)
         t.start()

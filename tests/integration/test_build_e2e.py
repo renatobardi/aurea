@@ -1,4 +1,5 @@
 """Integration tests for aurea build end-to-end (T031)."""
+
 from __future__ import annotations
 
 import os
@@ -30,6 +31,7 @@ class TestBuildBasic:
         if output.exists():
             html = output.read_text(encoding="utf-8")
             import re
+
             external = re.findall(r'(?:href|src)=["\']https?://', html, re.IGNORECASE)
             assert not external, (
                 f"Found {len(external)} external resource references: {external[:5]}"
@@ -50,9 +52,7 @@ class TestBuildBasic:
         output = initialized_project / "output" / "presentation.html"
         if output.exists():
             size = len(output.read_bytes())
-            assert 200_000 < size < 500_000, (
-                f"HTML size {size} bytes is outside 200KB-500KB range"
-            )
+            assert 200_000 < size < 500_000, f"HTML size {size} bytes is outside 200KB-500KB range"
 
     def test_empty_slides_exits_1(self, tmp_path: Path) -> None:
         os.chdir(tmp_path)

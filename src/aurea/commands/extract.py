@@ -64,9 +64,7 @@ class DesignExtractor:
         """Fetch *url*, checking robots.txt first."""
         _log.info("Fetching %s...", url)
         if not check_robots(url, self.user_agent):
-            raise AureaError(
-                f"Error: {url} is disallowed by robots.txt"
-            )
+            raise AureaError(f"Error: {url} is disallowed by robots.txt")
         return fetch_sync(url, self.user_agent, self.timeout)
 
     def extract_stylesheets(self, html: str, base_url: str) -> List[str]:
@@ -74,9 +72,7 @@ class DesignExtractor:
         try:
             from bs4 import BeautifulSoup
         except ImportError:
-            raise AureaError(
-                "beautifulsoup4 is not installed. Run: pip install aurea[extract]"
-            )
+            raise AureaError("beautifulsoup4 is not installed. Run: pip install aurea[extract]")
 
         soup = BeautifulSoup(html, "lxml")
         css_texts: List[str] = []
@@ -150,13 +146,9 @@ class DesignExtractor:
         result["text"] = dark_colors[0] if dark_colors else "#111111"
         result["background"] = light_colors[0] if light_colors else "#ffffff"
         # Surface is typically a slightly different shade from background (for cards, etc.)
-        result["surface"] = (
-            light_colors[1] if len(light_colors) > 1 else result["background"]
-        )
+        result["surface"] = light_colors[1] if len(light_colors) > 1 else result["background"]
         result["primary"] = (
-            accent_candidates[0]
-            if accent_candidates
-            else (ranked[0] if ranked else "#333333")
+            accent_candidates[0] if accent_candidates else (ranked[0] if ranked else "#333333")
         )
         if len(accent_candidates) > 1:
             result["secondary"] = accent_candidates[1]
@@ -172,9 +164,7 @@ class DesignExtractor:
 
             cssutils.log.setLevel(100)  # suppress cssutils warnings
         except ImportError:
-            raise AureaError(
-                "cssutils is not installed. Run: pip install aurea[extract]"
-            )
+            raise AureaError("cssutils is not installed. Run: pip install aurea[extract]")
 
         heading_fonts: List[str] = []
         body_fonts: List[str] = []
@@ -258,14 +248,8 @@ class DesignExtractor:
         spacing = tokens.get("spacing", {})
         shadows = tokens.get("shadows", [])
 
-        color_lines = "\n".join(
-            f"- {k}: `{v}`" for k, v in colors.items()
-        )
-        shadow_lines = (
-            "\n".join(f"- {s}" for s in shadows)
-            if shadows
-            else "- None detected"
-        )
+        color_lines = "\n".join(f"- {k}: `{v}`" for k, v in colors.items())
+        shadow_lines = "\n".join(f"- {s}" for s in shadows) if shadows else "- None detected"
 
         return """# {url} — Extracted Design System
 
@@ -379,15 +363,13 @@ When using this theme:
             try:
                 from bs4 import BeautifulSoup
             except ImportError:
-                raise AureaError(
-                    "beautifulsoup4 is not installed. Run: pip install aurea[extract]"
-                )
+                raise AureaError("beautifulsoup4 is not installed. Run: pip install aurea[extract]")
             parsed_base = urllib.parse.urlparse(self.url)
             base_netloc = parsed_base.netloc
             soup = BeautifulSoup(html, "lxml")
             links = soup.find_all("a", href=True)
             seen = {self.url}
-            for link in links[: 20]:  # cap at 20 extra pages
+            for link in links[:20]:  # cap at 20 extra pages
                 href = urllib.parse.urljoin(self.url, link["href"])
                 parsed = urllib.parse.urlparse(href)
                 if parsed.netloc != base_netloc:
@@ -509,9 +491,7 @@ def run_extract(
         sys.exit(1)
 
     # Print summary to stdout
-    print(
-        "Extracted theme '{n}' \u2192 {d}".format(n=name, d=result["theme_dir"])
-    )
+    print("Extracted theme '{n}' \u2192 {d}".format(n=name, d=result["theme_dir"]))
     print(
         "Colors extracted: {c}, Fonts detected: {f}".format(
             c=result["colors_extracted"], f=result["fonts_detected"]
@@ -530,10 +510,7 @@ def run_extract(
         if name not in existing_ids:
             local_reg.setdefault("themes", []).append(meta)
         else:
-            local_reg["themes"] = [
-                meta if t["id"] == name else t
-                for t in local_reg["themes"]
-            ]
+            local_reg["themes"] = [meta if t["id"] == name else t for t in local_reg["themes"]]
         local_reg_path.write_text(json.dumps(local_reg, indent=2), encoding="utf-8")
 
     # Apply if requested

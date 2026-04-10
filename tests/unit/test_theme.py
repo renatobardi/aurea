@@ -1,4 +1,5 @@
 """Unit tests for theme commands (T033)."""
+
 from __future__ import annotations
 
 import json
@@ -98,9 +99,7 @@ class TestLocalRegistryShadowsGlobal:
         (aurea_dir / "registry.json").write_text(json.dumps(local_reg))
 
         registry = load_registry(project_root=tmp_path)
-        default_theme = next(
-            (t for t in registry["themes"] if t["id"] == "default"), None
-        )
+        default_theme = next((t for t in registry["themes"] if t["id"] == "default"), None)
         assert default_theme is not None
         assert default_theme["name"] == "My Custom Default"
 
@@ -115,9 +114,7 @@ class TestThemeUse:
         theme_id = "default"
         apply_theme(theme_id, initialized_project)
 
-        config = json.loads(
-            (initialized_project / ".aurea" / "config.json").read_text()
-        )
+        config = json.loads((initialized_project / ".aurea" / "config.json").read_text())
         assert config["theme"] == theme_id
 
     def test_apply_nonexistent_theme_raises(self, initialized_project: Path) -> None:
