@@ -47,65 +47,64 @@ The project supports **four modes**, each self-contained:
 ```
 aurea/
 ├── src/aurea/
-│   ├── cli.py              # Typer entry point (init, build, serve, theme, extract)
-│   ├── init.py             # Scaffolding logic
-│   ├── build.py            # Markdown → HTML pipeline
-│   ├── serve.py            # Live reload server (watchdog for hot reload)
-│   ├── theme.py            # Theme listing, searching, applying
-│   ├── extract.py          # Web scraping & design extraction
+│   ├── cli.py              # Typer entry point (command routing)
+│   ├── commands/           # Command implementations (init, build, serve, theme, extract)
+│   │   ├── init.py         # Scaffolding logic
+│   │   ├── build.py        # Markdown → HTML pipeline
+│   │   ├── serve.py        # Live reload server (watchdog for hot reload)
+│   │   ├── theme.py        # Theme listing, searching, applying
+│   │   ├── extract.py      # Web scraping & design extraction
+│   │   └── __init__.py
 │   ├── _tpl.py             # Jinja2 template management
 │   ├── _regex.py           # Regex utilities for parsing
 │   ├── _http.py            # HTTP utilities (httpx wrapper)
 │   ├── _log.py             # Logging config (structured logging to stderr)
+│   ├── exceptions.py        # Custom exception types
 │   └── __init__.py
 ├── src/aurea/agent_commands/
-│   ├── claude/              (7 commands, .md format)
-│   ├── gemini/              (7 commands, .toml format)
-│   ├── copilot/             (7 commands, .agent.md format)
-│   ├── windsurf/            (7 commands, .md format)
-│   ├── devin/               (7 commands, .md format)
-│   ├── chatgpt/             (7 commands, .md format)
-│   ├── cursor/              (7 commands, .md format)
-│   └── generic/             (7 commands, .md format)
+│   ├── claude/              # 7 commands, .md format
+│   ├── gemini/              # 7 commands, .toml format
+│   ├── copilot/             # 7 commands, .agent.md format
+│   ├── windsurf/            # 7 commands, .md format
+│   ├── devin/               # 7 commands, .md format
+│   ├── chatgpt/             # 7 commands, .md format
+│   ├── cursor/              # 7 commands, .md format
+│   └── generic/             # 7 commands, .md format
 ├── src/aurea/themes/
-│   ├── registry.json        (master index of all themes with metadata)
+│   ├── registry.json        # Master index of all themes with metadata
 │   ├── default/
-│   │   ├── DESIGN.md        (design system spec, parsed by extract.py)
-│   │   ├── theme.css        (reveal.js theme CSS)
-│   │   ├── layout.css       (grid, animations)
-│   │   └── meta.json        (search metadata)
-│   ├── midnight/, aurora/, ... (40+ themes from awesome-design-md)
+│   │   ├── DESIGN.md        # Design system spec, parsed by extract.py
+│   │   ├── theme.css        # reveal.js theme CSS
+│   │   ├── layout.css       # Grid, animations, responsive overrides
+│   │   └── meta.json        # Search metadata
+│   └── ... (40+ themes from awesome-design-md, synced nightly)
 ├── src/aurea/templates/
-│   ├── reveal.html.j2       (Jinja2 template — reveal.js presentation)
-│   └── slide_readme.md.j2   (README template for new projects)
+│   ├── reveal.html.j2       # Jinja2 template — reveal.js presentation
+│   └── slide_readme.md.j2   # README template for new projects
 ├── src/aurea/vendor/
-│   ├── revealjs/dist/       (reveal.js 5.2.1 core — reveal.js UMD)
-│   ├── highlight.min.js     (highlight.js 11.9.0 UMD — safe to inline)
-│   └── marked.min.js        (marked 9.1.6 UMD — safe to inline)
+│   ├── revealjs/dist/       # reveal.js 5.2.1 core (UMD)
+│   ├── highlight.min.js     # highlight.js 11.9.0 (UMD)
+│   └── marked.min.js        # marked 9.1.6 (UMD)
 ├── tests/
-│   ├── unit/
-│   │   ├── test_cli.py
-│   │   ├── test_build.py
-│   │   ├── test_theme.py
-│   │   └── test_extract.py
-│   ├── integration/         (end-to-end: init → build → output)
-│   └── fixtures/            (sample slides, themes, expected HTML)
+│   ├── unit/                # Isolated function tests (mock external I/O)
+│   ├── integration/         # End-to-end workflows (real filesystem)
+│   └── fixtures/            # Sample data for tests
 ├── docs/
-│   ├── architecture.md      (how build pipeline works)
-│   ├── theme-system.md      (DESIGN.md format, registry structure)
-│   └── agent-commands.md    (workflow phases, command descriptions)
+│   ├── architecture.md      # Build pipeline internals & data flow
+│   ├── theme-system.md      # DESIGN.md format, registry structure
+│   └── agent-commands.md    # Workflow phases, command descriptions
 ├── build/
-│   └── aurea.spec           (PyInstaller spec for standalone .exe/.bin)
-├── pyproject.toml           (Python 3.8+, dependencies, entry points)
-├── ruff.toml                (linting & formatting config)
+│   └── aurea.spec           # PyInstaller spec for standalone binaries
+├── pyproject.toml           # Python metadata, dependencies, entry points
+├── ruff.toml                # Linting & formatting config
 ├── .github/workflows/
-│   ├── 1-lint-test.yml      (PR checks: ruff, mypy, pytest)
-│   ├── 2-build-dist.yml     (release: PyInstaller, zipapp, PyPI publish)
-│   └── 3-sync-themes.yml    (nightly: fetch from awesome-design-md)
-└── aurea-spec.md            (full specification & design decisions)
+│   ├── 1-lint-test.yml      # PR checks: ruff, mypy, pytest
+│   ├── 2-build-dist.yml     # Release builds: PyInstaller, zipapp, PyPI
+│   └── 3-sync-themes.yml    # Nightly theme sync from awesome-design-md
+└── aurea-spec.md            # Full specification & design decisions
 ```
 
-**Current Status**: M0–M3 implemented. PR #1 open (`feat/001-aurea-cli-toolkit`). T063 (four-mode distribution validation) pending.
+**Current Status**: M0–M3 fully implemented. Production-ready v0.1.0.
 
 ## Development Workflow
 
@@ -155,26 +154,30 @@ aurea serve --watch             # Auto-rebuild on file changes
 
 ### Testing Conventions
 
-- **Unit tests** (`tests/unit/`): Test individual functions (`parse_slide()`, `resolve_theme()`, etc.). Mock external I/O (httpx, filesystem). Use pytest with fixtures.
-  - `test_cli.py` — Typer command parsing, argument validation, help text
-  - `test_build.py` — Markdown parsing, Jinja2 rendering, CSS inlining
-  - `test_theme.py` — Theme loading, registry lookup, theme switching
-  - `test_extract.py` — HTML parsing, CSS extraction, DESIGN.md generation
+**Unit tests** (`tests/unit/`): Test individual functions in isolation. Mock external I/O (httpx, filesystem). Use pytest with fixtures.
+- Should import from `aurea.commands.*` and utility modules
+- Example: `test_build.py` tests `build.parse_markdown()`, `resolve_theme()`, `inline_assets()` separately
+- Fixtures go in `conftest.py` — reuse across test files
+- Coverage goal: 80%+ for `src/aurea/`
 
-- **Integration tests** (`tests/integration/`): End-to-end workflows. Use **real temp directories** and files (no mocks).
-  - `test_init.py` — `aurea init myproject` creates correct structure
-  - `test_build_end_to_end.py` — Markdown in → valid reveal.js HTML out
-  - `test_serve.py` — Server starts, responds to requests, file changes trigger rebuild
-  - `test_extract_end_to_end.py` — URL in → DESIGN.md + theme.css out
+**Integration tests** (`tests/integration/`): Verify end-to-end workflows work. Use **real temp directories** and files (no mocks of the build pipeline).
+- Example: `test_init_then_build.py` runs `aurea init myproject && aurea build`, checks output is valid HTML
+- Tests the entire chain: CLI parsing → command execution → file generation
+- Must not use `unittest.mock` for the core pipeline (init, build, serve, extract)
 
-- **Fixtures** (`tests/fixtures/`): Store reusable test data
-  - `sample_slides.md` — Example presentation Markdown
-  - `default_theme/` — Minimal but complete theme for testing
-  - `expected_output.html` — Known-good reveal.js output (for regression tests)
+**Fixtures** (`tests/fixtures/`): Shared test data
+- `sample_slides.md` — Example presentation with YAML frontmatter
+- `default_theme/` — Complete theme (DESIGN.md, CSS, meta.json)
+- `expected_output.html` — Known-good reveal.js output for regression testing
 
-- **Coverage goal**: 80%+ for `src/aurea/` (unit + integration combined). CLI arg handling may be lower.
-
-**Important**: Integration tests should **not** mock the build pipeline. They verify the entire workflow works, catching real integration bugs.
+**Running tests:**
+```bash
+pytest                              # All tests
+pytest tests/unit/ -v               # Unit tests with verbose output
+pytest tests/integration/ --tb=long # Integration tests with full tracebacks
+pytest -k "build and not serve"     # Run tests matching pattern
+pytest --cov=src/aurea --cov-report=html  # Coverage with HTML report
+```
 
 ## Build Pipeline Architecture
 
@@ -233,31 +236,14 @@ Understanding how Aurea works internally is key to implementing each phase:
 
 **Why inlining matters**: The output must work offline and in email clients. No external resources = guaranteed compatibility.
 
-## Key Implementation Phases
+## Implementation Status
 
-**Phase 0** (done): Repository setup, spec written.
-
-**Phase 1**: Prompt templates (7 commands for each agent type) + CLI scaffolding.
-- `aurea init` creates project structure with templates.
-- Agents (Claude, Gemini, Copilot, etc.) have formatted command files.
-
-**Phase 2**: Theme system (import 40+ designs, build registry, CLI).
-- `aurea theme list/search/use` work locally.
-- `registry.json` indexes all themes.
-- GitHub Actions syncs from `awesome-design-md`.
-
-**Phase 3**: Build pipeline (Markdown → HTML with Jinja2).
-- `aurea build` produces standalone HTML with inlined CSS/JS.
-- Reveal.js vendored in dist.
-- `aurea serve` with hot reload.
-
-**Phase 4**: Theme extraction (web scraping → DESIGN.md + CSS).
-- `aurea extract https://example.com --name mydesign`.
-- Automatic DESIGN.md generation from parsed CSS.
-
-**Phase 5**: Distribution (PyInstaller .exe, zipapp, PyPI, code signing).
-- GitHub Actions builds all four modes.
-- Release artifacts: `.pyz`, `.exe`, `.dmg`, `.tar.gz`, wheels.
+- **Phase 0**: ✅ Repository setup, spec written
+- **Phase 1**: ✅ Prompt templates (7 commands × 8 agents) + CLI scaffolding (init, build, serve, theme, extract)
+- **Phase 2**: ✅ Theme system (64 themes, registry, CLI search/list/use/info/show/create)
+- **Phase 3**: ✅ Build pipeline (Markdown → standalone HTML with inlined CSS/JS, hot reload server)
+- **Phase 4**: ✅ Theme extraction (web scraping with BeautifulSoup, CSS parsing, DESIGN.md generation)
+- **Phase 5**: ⚠️ Distribution (PyInstaller .exe, zipapp, PyPI publish ready; code signing/Intune/SCCM pending)
 
 ## Critical Architectural Decisions
 
