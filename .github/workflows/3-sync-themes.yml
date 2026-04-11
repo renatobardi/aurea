@@ -3,6 +3,10 @@ name: 3 — Sync Themes
 on:
   schedule:
     - cron: "0 3 * * 1"  # Every Monday at 03:00 UTC
+  push:
+    branches: [main]
+    paths:
+      - 'src/aurea/themes/**'
   workflow_dispatch:
 
 jobs:
