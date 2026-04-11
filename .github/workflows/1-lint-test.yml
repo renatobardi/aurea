@@ -19,6 +19,8 @@ jobs:
       - run: pip install -e ".[dev]"
       - run: ruff check .
       - run: ruff format --check .
+      - name: Validate theme registry                                                                               
+        run: python scripts/import-awesome-designs.py --from-local --dry-run
 
   typecheck:
     name: Type Check
