@@ -196,6 +196,26 @@ class TestRenderSlides:
         result = render_slides(p, theme_dir)
         assert result.slides[0].html is not None
 
+    def test_inline_html_passthrough(self) -> None:
+        """Raw HTML blocks (SVG, figure, div) must not be escaped."""
+        from aurea.commands.build import render_slides
+
+        md = (
+            "<figure>\n"
+            '<svg viewBox="0 0 800 250" xmlns="http://www.w3.org/2000/svg">\n'
+            '<rect x="20" y="25" width="100" height="50" fill="#f00"/>\n'
+            "</svg>\n"
+            "</figure>\n"
+        )
+        p = parse_slides(md)
+        theme_dir = FIXTURE_DIR / "default_theme"
+        result = render_slides(p, theme_dir)
+        html = result.slides[0].html
+        assert "<svg" in html, "SVG tag must not be escaped"
+        assert "&lt;svg" not in html, "SVG tag must not appear escaped"
+        assert "<figure" in html
+        assert "&lt;figure" not in html
+
 
 class TestInlineAssets:
     def test_returns_all_keys(self) -> None:

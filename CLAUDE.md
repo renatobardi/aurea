@@ -170,3 +170,15 @@ These constraints are non-negotiable and were deliberate:
 **Adding extraction features:**
 - `extract.py` is fragile — web scraping breaks when sites change
 - Unit test with `httpx_mock` (from pytest-httpx); integration test with real URLs
+
+**Updating themes from awesome-design-md:**
+- Workflow runs nightly via `3-sync-themes.yml`
+- Manual sync tool: `scripts/import-awesome-designs.py`
+  - `python scripts/import-awesome-designs.py` — full sync from upstream
+  - `python scripts/import-awesome-designs.py --from-local` — rebuild `registry.json` from existing theme `meta.json` files without re-downloading
+- Validate all 64 themes still build after changes
+
+**Updating reveal.js:**
+- ⚠️ Must stay on 5.x — do NOT upgrade to 6.x
+- Vendor files in `src/aurea/vendor/revealjs/dist/`
+- Check any updated UMD files for bare `import`/`export` statements before inlining
