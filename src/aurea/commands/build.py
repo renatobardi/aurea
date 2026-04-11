@@ -213,10 +213,10 @@ def render_slides(presentation: Presentation, theme_dir: Path) -> Presentation:
                 highlighted = pyg_highlight(code, lexer, _formatter)
                 return f'<pre><code class="highlight">{highlighted}</code></pre>\n'
 
-        md = mistune.create_markdown(renderer=_HighlightRenderer())
+        md = mistune.create_markdown(renderer=_HighlightRenderer(escape=False))
     except ImportError:
         # Pygments not available — use plain mistune renderer
-        md = mistune.create_markdown()
+        md = mistune.create_markdown(renderer=mistune.HTMLRenderer(escape=False))
 
     for slide in presentation.slides:
         slide.html = md(slide.markdown)
