@@ -130,7 +130,7 @@ aurea --help
 ### Common Commands
 
 ```bash
-# Lint (ruff check & format)
+# Lint (ruff check & format) — line-length 100, targets Python 3.8
 ruff check .
 ruff format .
 
@@ -318,7 +318,9 @@ These are non-negotiable constraints from the spec. Decisions here were delibera
 
 **Updating themes from awesome-design-md**:
 - Workflow runs nightly via `3-sync-themes.yml`
-- Manual sync: clone awesome-design-md repo, copy designs to `src/aurea/themes/`, rebuild registry
+- Manual sync tool: `scripts/import-awesome-designs.py` — clones/updates `.awesome-design-md/` and imports themes
+  - `python scripts/import-awesome-designs.py` — full sync from upstream
+  - `python scripts/import-awesome-designs.py --from-local` — rebuild `registry.json` from existing theme `meta.json` files without re-downloading
 - Validate all 64 themes still build after changes
 
 **Updating reveal.js**:
