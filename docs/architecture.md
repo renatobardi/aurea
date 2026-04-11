@@ -23,7 +23,7 @@ src/aurea/
 ├── templates/
 │   ├── reveal.html.j2  — Base reveal.js HTML template (all assets inlined)
 │   └── slide_readme.md.j2 — Project README template
-├── themes/             — Bundled themes (default, midnight, aurora, editorial, brutalist + 31+ imported)
+├── themes/             — Bundled themes (default, midnight, aurora, editorial, brutalist + 59 imported)
 │   └── registry.json   — Master theme index
 ├── agent_commands/     — Pre-built prompt templates (7 commands × 8 agents)
 └── vendor/revealjs/    — reveal.js 5.2.1 vendored (no CDN)

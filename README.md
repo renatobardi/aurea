@@ -93,6 +93,10 @@ pip install aurea[extract]
 ```bash
 # Download from releases
 curl -L https://github.com/renatobardi/aurea/releases/latest/download/aurea.pyz -o aurea.pyz
+curl -L https://github.com/renatobardi/aurea/releases/latest/download/aurea.pyz.sha256 -o aurea.pyz.sha256
+
+# Verify integrity
+sha256sum -c aurea.pyz.sha256
 
 # Run with Python
 python aurea.pyz init my-talk --agent claude --theme stripe
@@ -104,10 +108,21 @@ python aurea.pyz init my-talk --agent claude --theme stripe
 
 Download from [releases page](https://github.com/renatobardi/aurea/releases):
 
-- **Windows**: `aurea.exe` (40 MB)
-- **macOS (Intel)**: `aurea` (40 MB)
-- **macOS (Apple Silicon)**: `aurea.app` (40 MB)
-- **Linux**: `aurea` (40 MB)
+| Platform | File | SHA256 |
+|----------|------|--------|
+| Windows | `aurea.exe` | `aurea.exe.sha256` |
+| macOS (Intel) | `aurea` | `aurea.sha256` |
+| macOS (Apple Silicon) | `aurea.app` | `aurea.app.sha256` |
+| Linux | `aurea` | `aurea.sha256` |
+
+Verify integrity before running:
+```bash
+# macOS / Linux
+sha256sum -c aurea.sha256
+
+# Windows (PowerShell)
+Get-FileHash aurea.exe | Select-String (Get-Content aurea.exe.sha256).Split()[0]
+```
 
 No Python required. Works on Windows 7+, macOS 10.13+, Linux glibc 2.17+.
 
@@ -598,5 +613,5 @@ Contributions welcome! Please:
 ---
 
 **Status**: Production-ready (v0.1.0)  
-**Last Updated**: 2026-04-09  
+**Last Updated**: 2026-04-10  
 **Requires**: Python 3.8+
