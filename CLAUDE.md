@@ -104,8 +104,6 @@ aurea/
 └── aurea-spec.md            # Full specification & design decisions
 ```
 
-**Current Status**: M0–M3 fully implemented. Production-ready v0.1.0.
-
 ## Development Workflow
 
 ### Setup
@@ -236,15 +234,6 @@ Understanding how Aurea works internally is key to implementing each phase:
 
 **Why inlining matters**: The output must work offline and in email clients. No external resources = guaranteed compatibility.
 
-## Implementation Status
-
-- **Phase 0**: ✅ Repository setup, spec written
-- **Phase 1**: ✅ Prompt templates (7 commands × 8 agents) + CLI scaffolding (init, build, serve, theme, extract)
-- **Phase 2**: ✅ Theme system (64 themes, registry, CLI search/list/use/info/show/create)
-- **Phase 3**: ✅ Build pipeline (Markdown → standalone HTML with inlined CSS/JS, hot reload server)
-- **Phase 4**: ✅ Theme extraction (web scraping with BeautifulSoup, CSS parsing, DESIGN.md generation)
-- **Phase 5**: ⚠️ Distribution (PyInstaller .exe, zipapp, PyPI publish ready; code signing/Intune/SCCM pending)
-
 ## Critical Architectural Decisions
 
 These are non-negotiable constraints from the spec. Decisions here were deliberate:
@@ -290,13 +279,6 @@ These are non-negotiable constraints from the spec. Decisions here were delibera
 **Logging**:
 - `src/aurea/_log.py` — Configured for logging.INFO level, structured output to stderr
 - All CLI output goes to stdout (for piping); diagnostics to stderr
-
-## Design Principles
-
-- **Portability first**: Minimize external dependencies, support Windows without Python.
-- **Templates as product**: Prompts are the real value; CLI is convenience.
-- **Autosufficient output**: HTML runs offline, in any browser, no server.
-- **Progressive**: Work from "copy-paste templates" to "full CLI + themes + live preview."
 
 ## Common Development Tasks
 
@@ -452,11 +434,3 @@ cli.py (entry point)
 └── _log.py (logging)
 ```
 
-## Recent Changes
-- v0.1.0 (2026-04-09): Full M0–M3 implementation, production-ready
-  - CLI: init, build, serve, theme, extract fully working
-  - Themes: 64 total (5 original + 59 from awesome-design-md)
-  - Build: Markdown → standalone HTML with inlined CSS/JS
-  - Extract: Web scraping → DESIGN.md generation
-  - Tests: Unit + integration, 80%+ coverage
-  - Distribution: pip, zipapp, PyInstaller (exe/bin/dmg)
