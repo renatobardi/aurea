@@ -527,7 +527,7 @@ python -m shiv -c aurea -o aurea.pyz .
 
 ### Testing Requirements
 
-- **Unit tests** (150+): Isolated functions, mock I/O
+- **Unit tests** (157+): Isolated functions, mock I/O
 - **Integration tests**: End-to-end workflows, real filesystem
 - **Coverage**: ≥80% for `src/aurea/`
 - **All tests must pass** before merge to main
@@ -613,5 +613,5 @@ Contributions welcome! Please:
 ---
 
 **Status**: Production-ready (v0.1.0)  
-**Last Updated**: 2026-04-10  
+**Last Updated**: 2026-04-11  
 **Requires**: Python 3.8+

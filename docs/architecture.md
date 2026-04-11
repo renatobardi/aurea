@@ -48,7 +48,7 @@ Presentation dataclass
     │
     ▼  render_slides()
 Presentation with html field set per slide
-    │   Uses mistune + Pygments (syntax highlighting)
+    │   Uses mistune (escape=False) + Pygments — raw HTML blocks (SVG, figure, div) pass through verbatim
     │
     ▼  inline_assets()
 assets dict (CSS strings, JS strings)
