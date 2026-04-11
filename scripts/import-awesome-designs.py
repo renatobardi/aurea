@@ -2,12 +2,17 @@
 
 Usage:
     python scripts/import-awesome-designs.py [--repo-dir PATH] [--dry-run]
+    python scripts/import-awesome-designs.py --from-local [--dry-run]
 
 This script:
 1. Clones or updates VoltAgent/awesome-design-md
 2. For each DESIGN.md in the repo, extracts metadata
 3. Generates meta.json, theme.css, layout.css for each theme
 4. Updates src/aurea/themes/registry.json
+
+With --from-local: skips network access and rebuilds registry.json from the
+meta.json files already present in src/aurea/themes/. Use this to fix
+registry/directory desync without re-downloading the external repo.
 """
 # IMPORTANT: Do NOT use `from __future__ import annotations` in this script.
 # It must run in Python 3.8+ without __future__ annotations.
@@ -280,6 +285,38 @@ def update_registry(themes: List[Dict[str, Any]], dry_run: bool = False) -> None
     print(f"Updated {REGISTRY_PATH} — {len(existing)} total themes")
 
 
+def rebuild_registry_from_local(dry_run: bool = False) -> int:
+    """Rebuild registry.json from meta.json files already in THEMES_DIR.
+
+    Use this when theme directories exist but registry.json is out of sync.
+    No network access required.
+    """
+    meta_files = sorted(THEMES_DIR.glob("*/meta.json"))
+    if not meta_files:
+        print("No meta.json files found in themes directory.", file=sys.stderr)
+        return 1
+
+    print(f"Found {len(meta_files)} theme directories with meta.json")
+
+    themes: List[Dict[str, Any]] = []
+    for meta_path in meta_files:
+        theme_id = meta_path.parent.name
+        try:
+            meta = json.loads(meta_path.read_text(encoding="utf-8"))
+            # Ensure required fields are present
+            meta.setdefault("id", theme_id)
+            meta.setdefault("path", theme_id)
+            meta.setdefault("version", "1.0.0")
+            themes.append(meta)
+            print(f"  + {theme_id}: {meta.get('name', theme_id)}")
+        except (json.JSONDecodeError, OSError) as exc:
+            print(f"  ! Skipping {theme_id}: {exc}", file=sys.stderr)
+
+    print(f"\nLoaded {len(themes)} themes from local directories")
+    update_registry(themes, dry_run=dry_run)
+    return 0
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -292,7 +329,18 @@ def main() -> int:
         action="store_true",
         help="Print what would be done without writing files",
     )
+    parser.add_argument(
+        "--from-local",
+        action="store_true",
+        help=(
+            "Rebuild registry.json from existing meta.json files in src/aurea/themes/ "
+            "without cloning the remote repo. Fixes registry/directory desync."
+        ),
+    )
     args = parser.parse_args()
+
+    if args.from_local:
+        return rebuild_registry_from_local(dry_run=args.dry_run)
 
     repo_dir = Path(args.repo_dir)
 

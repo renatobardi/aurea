@@ -146,8 +146,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "airbnb",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "airbnb"
     },
     {
       "id": "airtable",
@@ -168,8 +168,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "airtable",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "airtable"
     },
     {
       "id": "apple",
@@ -190,8 +190,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "apple",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "apple"
     },
     {
       "id": "bmw",
@@ -212,8 +212,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "bmw",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "bmw"
     },
     {
       "id": "cal",
@@ -234,8 +234,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "cal",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "cal"
     },
     {
       "id": "claude",
@@ -256,8 +256,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "claude",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "claude"
     },
     {
       "id": "clay",
@@ -278,8 +278,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "clay",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "clay"
     },
     {
       "id": "clickhouse",
@@ -300,8 +300,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "clickhouse",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "clickhouse"
     },
     {
       "id": "cohere",
@@ -322,8 +322,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "cohere",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "cohere"
     },
     {
       "id": "coinbase",
@@ -344,8 +344,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "coinbase",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "coinbase"
     },
     {
       "id": "composio",
@@ -366,8 +366,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "composio",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "composio"
     },
     {
       "id": "cursor",
@@ -388,8 +388,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "cursor",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "cursor"
     },
     {
       "id": "elevenlabs",
@@ -410,8 +410,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "elevenlabs",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "elevenlabs"
     },
     {
       "id": "expo",
@@ -432,8 +432,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "expo",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "expo"
     },
     {
       "id": "ferrari",
@@ -454,8 +454,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "ferrari",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "ferrari"
     },
     {
       "id": "figma",
@@ -476,8 +476,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "figma",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "figma"
     },
     {
       "id": "framer",
@@ -498,8 +498,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "framer",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "framer"
     },
     {
       "id": "hashicorp",
@@ -520,8 +520,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "hashicorp",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "hashicorp"
     },
     {
       "id": "ibm",
@@ -542,8 +542,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "ibm",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "ibm"
     },
     {
       "id": "intercom",
@@ -564,8 +564,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "intercom",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "intercom"
     },
     {
       "id": "kraken",
@@ -586,8 +586,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "kraken",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "kraken"
     },
     {
       "id": "lamborghini",
@@ -608,8 +608,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "lamborghini",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "lamborghini"
     },
     {
       "id": "linear.app",
@@ -630,8 +630,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "linear.app",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "linear.app"
     },
     {
       "id": "lovable",
@@ -652,8 +652,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "lovable",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "lovable"
     },
     {
       "id": "minimax",
@@ -674,8 +674,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "minimax",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "minimax"
     },
     {
       "id": "mintlify",
@@ -696,8 +696,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "mintlify",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "mintlify"
     },
     {
       "id": "miro",
@@ -718,8 +718,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "miro",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "miro"
     },
     {
       "id": "mistral.ai",
@@ -740,8 +740,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "mistral.ai",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "mistral.ai"
     },
     {
       "id": "mongodb",
@@ -762,8 +762,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "mongodb",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "mongodb"
     },
     {
       "id": "notion",
@@ -784,8 +784,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "notion",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "notion"
     },
     {
       "id": "nvidia",
@@ -806,8 +806,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "nvidia",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "nvidia"
     },
     {
       "id": "ollama",
@@ -828,8 +828,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "ollama",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "ollama"
     },
     {
       "id": "opencode.ai",
@@ -850,8 +850,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "opencode.ai",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "opencode.ai"
     },
     {
       "id": "pinterest",
@@ -872,8 +872,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "pinterest",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "pinterest"
     },
     {
       "id": "posthog",
@@ -894,8 +894,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "posthog",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "posthog"
     },
     {
       "id": "raycast",
@@ -916,8 +916,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "raycast",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "raycast"
     },
     {
       "id": "renault",
@@ -938,8 +938,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "renault",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "renault"
     },
     {
       "id": "replicate",
@@ -960,8 +960,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "replicate",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "replicate"
     },
     {
       "id": "resend",
@@ -982,8 +982,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "resend",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "resend"
     },
     {
       "id": "revolut",
@@ -1004,8 +1004,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "revolut",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "revolut"
     },
     {
       "id": "runwayml",
@@ -1026,8 +1026,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "runwayml",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "runwayml"
     },
     {
       "id": "sanity",
@@ -1048,8 +1048,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "sanity",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "sanity"
     },
     {
       "id": "semrush",
@@ -1070,8 +1070,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "semrush",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "semrush"
     },
     {
       "id": "sentry",
@@ -1092,8 +1092,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "sentry",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "sentry"
     },
     {
       "id": "spacex",
@@ -1114,8 +1114,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "spacex",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "spacex"
     },
     {
       "id": "spotify",
@@ -1136,8 +1136,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "spotify",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "spotify"
     },
     {
       "id": "stripe",
@@ -1158,8 +1158,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "stripe",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "stripe"
     },
     {
       "id": "supabase",
@@ -1180,8 +1180,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "supabase",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "supabase"
     },
     {
       "id": "superhuman",
@@ -1202,8 +1202,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "superhuman",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "superhuman"
     },
     {
       "id": "tesla",
@@ -1224,8 +1224,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "tesla",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "tesla"
     },
     {
       "id": "together.ai",
@@ -1246,8 +1246,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "together.ai",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "together.ai"
     },
     {
       "id": "uber",
@@ -1268,8 +1268,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "uber",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "uber"
     },
     {
       "id": "vercel",
@@ -1290,8 +1290,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "vercel",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "vercel"
     },
     {
       "id": "voltagent",
@@ -1312,8 +1312,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "voltagent",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "voltagent"
     },
     {
       "id": "warp",
@@ -1334,8 +1334,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "warp",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "warp"
     },
     {
       "id": "webflow",
@@ -1356,8 +1356,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "webflow",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "webflow"
     },
     {
       "id": "wise",
@@ -1378,8 +1378,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "wise",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "wise"
     },
     {
       "id": "x.ai",
@@ -1400,8 +1400,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "x.ai",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "x.ai"
     },
     {
       "id": "zapier",
@@ -1422,8 +1422,8 @@
         "body": "sans-serif"
       },
       "version": "1.0.0",
-      "path": "zapier",
-      "source": "awesome-design-md"
+      "source": "awesome-design-md",
+      "path": "zapier"
     }
   ]
 }
